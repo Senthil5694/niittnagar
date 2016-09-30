@@ -22,7 +22,7 @@ public class RegisterModel {
 	private String emailid;
 	@NotNull
 	@Size(min=10, max=10)
-	private int mobilenumber;
+	private String mobilenumber;
 	
 	public String getUserid() {
 		return userid;
@@ -66,11 +66,13 @@ public class RegisterModel {
 	public void setEmailid(String emailid) {
 		this.emailid = emailid;
 	}
-	public int getMobilenumber() {
+	public String getMobilenumber() {
 		return mobilenumber;
 	}
-	public void setMobilenumber(int mobilenumber) {
+	public void setMobilenumber(String mobilenumber) {
 		this.mobilenumber = mobilenumber;
 	}
+	
+	
 	
 }
