@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tronicsville.DAO.SupplierDao;
 import com.tronicsville.model.Supplier;
@@ -18,7 +19,7 @@ public class SupplierDaoImpl implements SupplierDao {
 		
 		this.sessionFactory = sessionFactory;
 	}
-
+@Transactional
 	public boolean save(Supplier supplier) {
 		try
 		{
@@ -30,7 +31,7 @@ public class SupplierDaoImpl implements SupplierDao {
 		}
 		return true;
 	}
-
+@Transactional
 	public boolean update(Supplier supplier) {
 		try
 		{
@@ -43,25 +44,19 @@ public class SupplierDaoImpl implements SupplierDao {
 		return true;	
 	
 	}
-
-	public boolean delete(String id) {
-		try
-		{
-			sessionFactory.getCurrentSession().delete(get(id));
-		}catch (Exception e)
-		{
-	   e.printStackTrace();
-	   return false;
-		}
-		return true;
+@Transactional
+	public void delete(String id) {
+	Supplier supplier = new Supplier();
+	supplier.setId(id);
+	sessionFactory.getCurrentSession().delete(supplier);
 	}
-
+@Transactional
 	public Supplier get(String id) {
 		
     return null;
 
 	}
-
+@Transactional
 	public List<Supplier> list() {
 		
 		return null;	

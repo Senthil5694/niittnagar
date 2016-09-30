@@ -1,7 +1,8 @@
 package com.tronicsville.DAO.DaoImpl;
 import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +33,7 @@ public class RegisterDaoImpl implements RegisterDao {
 	public void saveorUpdate(RegisterModel registration) {
 	try
 	{
-		sessionFactory.getCurrentSession().saveorUpdate(registration);
+		//sessionFactory.getCurrentSession().saveorUpdate(registration);
 	}catch (Exception e)
 	{
 		e.printStackTrace();
@@ -58,7 +59,7 @@ public class RegisterDaoImpl implements RegisterDao {
 	}
 	private RegisterModel getRegisterModel(String hql)
 	{
-		Query query = sessionFactory.getCurrentSessison().CreateQuery(hql);
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<RegisterModel> list = (List<RegisterModel>) query.list();
 		if(list != null && !list.isEmpty())
