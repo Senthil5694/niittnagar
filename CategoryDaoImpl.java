@@ -19,7 +19,7 @@ public class CategoryDaoImpl implements CategoryDao {
 		
 		this.sessionFactory = sessionFactory;
 	}
-
+@Transactional
 	public boolean save(Category category) {
 		try
 		{
@@ -31,7 +31,7 @@ public class CategoryDaoImpl implements CategoryDao {
 		}
 		return true;
 	}
-
+@Transactional
 	public boolean update(Category category) {
 		try
 		{
@@ -43,24 +43,18 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 		return true;
 	}
-
-	public boolean delete(String id) {
-		try
-		{
-			sessionFactory.getCurrentSession().delete(get(id));	
-		}catch (Exception e)
-		{
-		e.printStackTrace();
-		return false;
-	}
-		return true;
-	}
-
+@Transactional
+	public void delete(String id){
+	Category category = new Category();
+	category.setId(id);
+	sessionFactory.getCurrentSession().delete(category);
+}
+@Transactional
 	public Category get(String id) {
 
 		return null;
 	}
-
+@Transactional
 	public List<Category> list() {
 
 		return null;
