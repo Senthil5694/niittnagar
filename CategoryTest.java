@@ -17,11 +17,13 @@ public class CategoryTest {
 		CategoryDao categoryDao =(CategoryDao) context.getBean("categoryDao");
 		
 		Category category = (Category) context.getBean("category");
-		category.setId("mobo1");
-		category.setName("mobiles");
-		category.setDescription("electronics");
+	
+       // category.setId("cat_002");
+       // category.setName("mobiles");
+       // category.setDescription("Electronics");
+	
 		
-		categoryDao.save(category);
+		categoryDao.delete("cat_002");
 		
 		System.out.println("Data inserted into the database successfully");
 	}

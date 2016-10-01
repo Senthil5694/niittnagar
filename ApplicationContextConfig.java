@@ -15,9 +15,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.tronicsville.DAO.CategoryDao;
 import com.tronicsville.DAO.ProductDao;
+import com.tronicsville.DAO.RegisterDao;
 import com.tronicsville.DAO.SupplierDao;
 import com.tronicsville.DAO.DaoImpl.CategoryDaoImpl;
 import com.tronicsville.DAO.DaoImpl.ProductDaoImpl;
+import com.tronicsville.DAO.DaoImpl.RegisterDaoImpl;
 import com.tronicsville.DAO.DaoImpl.SupplierDaoImpl;
 import com.tronicsville.model.Category;
 import com.tronicsville.model.Product;
@@ -36,7 +38,7 @@ public class ApplicationContextConfig {
 	    public DataSource getDataSource() {
 	    	BasicDataSource dataSource = new BasicDataSource();
 	    	dataSource.setDriverClassName("org.h2.Driver");
-	    	dataSource.setUrl("jdbc:h2:tcp://localhost/~/test");
+	    	dataSource.setUrl("jdbc:h2:tcp://localhost/~/welcome");
 	    	dataSource.setUsername("sa");
 	    	dataSource.setPassword("");
 	    	
@@ -89,9 +91,14 @@ public class ApplicationContextConfig {
 		public ProductDao getProductDao(SessionFactory sessionFactory) {
 			return new ProductDaoImpl(sessionFactory);
 		}
+		@Autowired
+		@Bean(name = "registerDao")
+		public RegisterDao getRegisterDao(SessionFactory sessionFactory) {
+			return new RegisterDaoImpl(sessionFactory);
+		}
 
 	    
-	}
+}
 
 
 

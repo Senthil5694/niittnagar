@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tronicsville.DAO.ProductDao;
+import com.tronicsville.model.Category;
 import com.tronicsville.model.Product;
 @Repository
 public class ProductDaoImpl implements ProductDao {
@@ -46,9 +47,11 @@ public class ProductDaoImpl implements ProductDao {
 	}
 @Transactional
 	public boolean delete(String id) {
+	Category category = new Category();
+	category.setId(id);
 		try
 		{
-			sessionFactory.getCurrentSession().delete(get(id));
+			sessionFactory.getCurrentSession().delete(category);
 		}catch (Exception e)
 		{
 	  e.printStackTrace();

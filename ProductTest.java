@@ -22,6 +22,7 @@ public class ProductTest {
 	    product.setName("laptop");
 	    product.setPrice("50000");
 	    
+	    
 	    productDao.save(product);
 	    
 	    System.out.println("Data inserted into the database successfully");

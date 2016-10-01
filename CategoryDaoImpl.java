@@ -45,10 +45,18 @@ public class CategoryDaoImpl implements CategoryDao {
 		return true;
 	}
 @Transactional
-	public void delete(String id){
+	public boolean delete(String id){
 	Category category = new Category();
 	category.setId(id);
-	sessionFactory.getCurrentSession().delete(category);
+	try
+	{
+		sessionFactory.getCurrentSession().delete(category);	
+	}catch (Exception e)
+	{
+	e.printStackTrace();
+	return false;
+}
+	return true;
 }
 @Transactional
 	public Category get(String id) {

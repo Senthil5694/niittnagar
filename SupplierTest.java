@@ -15,11 +15,11 @@ public class SupplierTest {
 	
 	SupplierDao supplierDao =(SupplierDao) context.getBean("supplierDao");
 	Supplier supplier = (Supplier) context.getBean("supplier");
-	
-    supplier.setId("sup_001");
-    supplier.setName("RKO");
-    supplier.setAddress("chennai");
     
+	supplier.setId("sup_001");
+	supplier.setName("RKO");
+	supplier.setAddress("chennai");
+	
     supplierDao.save(supplier);
     
     System.out.println("Data inserted into the database successfully");

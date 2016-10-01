@@ -45,10 +45,19 @@ public class SupplierDaoImpl implements SupplierDao {
 	
 	}
 @Transactional
-	public void delete(String id) {
+	public boolean delete(String id) {
 	Supplier supplier = new Supplier();
 	supplier.setId(id);
-	sessionFactory.getCurrentSession().delete(supplier);
+	try
+	{
+		sessionFactory.getCurrentSession().delete(supplier);
+	}catch (Exception e)
+	{
+   e.printStackTrace();
+   return false;
+	}
+	return true;	
+	
 	}
 @Transactional
 	public Supplier get(String id) {

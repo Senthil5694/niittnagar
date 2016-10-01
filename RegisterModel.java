@@ -8,11 +8,11 @@ import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 @Entity
-@Table(name="registration")
-@Component
+@Table(name="register")
+@Component("register")
 public class RegisterModel {
 	@Id
-	private String userid;
+	private String id;
 	@NotNull
 	@Size(min=5 ,max=20)
 	private String username,password;
@@ -24,11 +24,11 @@ public class RegisterModel {
 	@Size(min=10, max=10)
 	private String mobilenumber;
 	
-	public String getUserid() {
-		return userid;
+	public String getId() {
+		return id;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getUsername() {
 		return username;

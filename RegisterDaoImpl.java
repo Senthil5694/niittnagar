@@ -14,7 +14,7 @@ public class RegisterDaoImpl implements RegisterDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public void RegisterDaoImpl(SessionFactory sessionFactory)
+	public RegisterDaoImpl(SessionFactory sessionFactory)
 	{
 		
 		this.sessionFactory = sessionFactory;
@@ -30,26 +30,30 @@ public class RegisterDaoImpl implements RegisterDao {
 		return getRegisterModel(hql);
 	}
 @Transactional
-	public void saveorUpdate(RegisterModel registration) {
+	public boolean update(RegisterModel register) {
 	try
 	{
-		//sessionFactory.getCurrentSession().saveorUpdate(registration);
+	sessionFactory.getCurrentSession().update(register);
 	}catch (Exception e)
 	{
 		e.printStackTrace();
+		return false;
 	}
-		
+	return true;	
 	}
 @Transactional
-	public void delete(String id) {
+	public boolean delete(String id) {
+	RegisterModel registerModel = new RegisterModel();
+	registerModel.setId(id);
 		try
 		{
-			sessionFactory.getCurrentSession().delete(get(id));	
+			sessionFactory.getCurrentSession().delete(registerModel);	
 		}catch (Exception e)
 		{
 		e.printStackTrace();
+		return false;
 	}
-		
+		return true;
 	}
 @Transactional
 	public RegisterModel isValidUser(String id, String password) {
@@ -68,5 +72,17 @@ public class RegisterDaoImpl implements RegisterDao {
 		}
 		return null;
 	}
+	@Transactional 
+	public boolean save(RegisterModel registerModel){
+		try
+		{
+			sessionFactory.getCurrentSession().save(registerModel);
+		}catch (Exception e)
+		{
+	   e.printStackTrace();
+	   return false;
+		}
+		return true;
+	}
+	}
 
-}
