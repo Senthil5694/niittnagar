@@ -10,10 +10,14 @@ import com.tronicsville.DAO.ProductDao;
 import com.tronicsville.DAO.SupplierDao;
 import com.tronicsville.model.Category;
 import com.tronicsville.model.Product;
+import com.tronicsville.model.RegisterModel;
 import com.tronicsville.model.Supplier;
 
 @Controller
 public class AdminController {
+	
+	@Autowired
+	RegisterModel registerModel;
 	
 	@Autowired
 	private Category category;
