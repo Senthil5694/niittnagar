@@ -16,6 +16,14 @@ public class Category {
 	private String id;
 	private String name;
 	private String description;
+	@OneToMany(mappedBy="category" ,fetch=FetchType.EAGER)
+	private Set<Product> products;
+	public Set<Product> getproducts(){
+		return products;
+	}
+	public void setproducts(Set<Product> products){
+		this.products=products;
+	}
 	public String getId() {
 		return id;
 	}

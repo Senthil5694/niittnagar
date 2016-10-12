@@ -7,5 +7,6 @@ public interface CategoryDao {
 	public boolean delete(String id);
 	public Category get(String id);
 	public List<Category> list();
+	public Category getByName(String name);
 
 }

@@ -2,6 +2,8 @@ package com.tronicsville.DAO.DaoImpl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,15 +12,21 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tronicsville.DAO.CategoryDao;
 import com.tronicsville.model.Category;
 
-@Repository
+@Repository("categoryDao")
 public class CategoryDaoImpl implements CategoryDao {
 	@Autowired
 	private SessionFactory sessionFactory;
-
+	
+@Autowired
 	public CategoryDaoImpl(SessionFactory sessionFactory)
 	{
 		
-		this.sessionFactory = sessionFactory;
+		try {
+			this.sessionFactory = sessionFactory;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 @Transactional
 	public boolean save(Category category) {
@@ -60,14 +68,39 @@ public class CategoryDaoImpl implements CategoryDao {
 }
 @Transactional
 	public Category get(String id) {
+	String hql = "from Category where id =" + "'" + id + "'";
+	Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	@SuppressWarnings("unchecked")
+	List<Category> list = (List<Category>) query.list();
+	if(list != null && !list.isEmpty())
+	{
+		return list.get(0);
+	}
+	return null;
+}
 
-		return null;
+	
+@Transactional
+	public List<Category> list() {	
+	@SuppressWarnings("unchecked")
+	List<Category> list = (List<Category>) sessionFactory.getCurrentSession();
+     return list;	
 	}
 @Transactional
-	public List<Category> list() {
-
-		return null;
+public Category getByName(String name) {
+	
+	String hql = "from Category where name=" + "'"+ name +"'";
+	Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	
+	@SuppressWarnings("unchecked")
+	List<Category> list = (List<Category>) query.list();
+	
+	if (list != null && !list.isEmpty()) {
+		return list.get(0);
 	}
+	
+	return null;
+}
 	
 	
 
