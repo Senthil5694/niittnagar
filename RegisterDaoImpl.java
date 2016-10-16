@@ -1,4 +1,5 @@
-package com.tronicsville.DAO.DaoImpl;
+package com.DaoImpl;
+
 import java.util.List;
 
 import org.hibernate.Query;
@@ -7,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tronicsville.DAO.RegisterDao;
-import com.tronicsville.model.RegisterModel;
+import com.Dao.RegisterDao;
+import com.Model.RegisterModel;
+@Transactional
 @Repository
-public class RegisterDaoImpl implements RegisterDao {
+public class RegisterDaoImpl implements RegisterDao{
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -19,17 +21,17 @@ public class RegisterDaoImpl implements RegisterDao {
 		
 		this.sessionFactory = sessionFactory;
 	}
-@Transactional
+
 	public java.util.List<RegisterModel> List() {
 		
 		return null;
 	}
-@Transactional
-	public RegisterModel get(String id) {
-	String hql ="from RegisterModel where id=" + "'"+ id + "'";
+	
+	public RegisterModel get(String username) {
+	String hql ="from RegisterModel where username=" + "'"+ username + "'";
 		return getRegisterModel(hql);
 	}
-@Transactional
+	
 	public boolean update(RegisterModel register) {
 	try
 	{
@@ -41,10 +43,10 @@ public class RegisterDaoImpl implements RegisterDao {
 	}
 	return true;	
 	}
-@Transactional
-	public boolean delete(String id) {
+
+	public boolean delete(String username) {
 	RegisterModel registerModel = new RegisterModel();
-	registerModel.setId(id);
+	registerModel.setUsername(username);
 		try
 		{
 			sessionFactory.getCurrentSession().delete(registerModel);	
@@ -55,11 +57,19 @@ public class RegisterDaoImpl implements RegisterDao {
 	}
 		return true;
 	}
-@Transactional
-	public RegisterModel isValidUser(String id, String password) {
-	String hql ="from RegisterModel where id=" + "'"+ id + "'" + "and" 
-	+ "password = " + "'" + password + "'";
-		return getRegisterModel(hql);
+
+	public RegisterModel isValidUser(String username, String password) {
+	String hql ="from RegisterModel where username= '" + username + "' and " + " password ='" + password + "'";
+	Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	@SuppressWarnings("unchecked")
+	List<RegisterModel> list = (List<RegisterModel>) query.list();
+	if(list != null && !list.isEmpty())
+	{
+	
+		return list.get(0);
+	}
+	
+	return null;
 	}
 	private RegisterModel getRegisterModel(String hql)
 	{
@@ -68,11 +78,13 @@ public class RegisterDaoImpl implements RegisterDao {
 		List<RegisterModel> list = (List<RegisterModel>) query.list();
 		if(list != null && !list.isEmpty())
 		{
+		
 			return list.get(0);
 		}
+		
 		return null;
 	}
-	@Transactional 
+	
 	public boolean save(RegisterModel registerModel){
 		try
 		{
@@ -84,5 +96,5 @@ public class RegisterDaoImpl implements RegisterDao {
 		}
 		return true;
 	}
-	}
 
+}

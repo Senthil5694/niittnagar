@@ -1,33 +1,35 @@
-package com.tronicsville.controller;
+package com.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tronicsville.DAO.CategoryDao;
-import com.tronicsville.DAO.ProductDao;
-import com.tronicsville.DAO.RegisterDao;
-import com.tronicsville.DAO.SupplierDao;
-import com.tronicsville.model.Category;
-import com.tronicsville.model.Product;
-import com.tronicsville.model.RegisterModel;
-import com.tronicsville.model.Supplier;
+import com.Dao.CategoryDao;
+import com.Dao.ProductDao;
+import com.Dao.RegisterDao;
+import com.Dao.SupplierDao;
+import com.Model.Category;
+import com.Model.Product;
+import com.Model.RegisterModel;
+import com.Model.Supplier;
 
 @Controller
 public class LoginController {
-	
 	@Autowired
-	RegisterModel registerModel;
+     RegisterModel registerModel;
 	
 	@Autowired
 	private CategoryDao categoryDao;
 	
 	@Autowired
-	private RegisterDao registerDao;
+	 RegisterDao registerDao;
 	
 	@Autowired
 	private Category category;
@@ -37,27 +39,42 @@ public class LoginController {
 	
 	@Autowired
 	private Supplier supplier;
-	
 	@Autowired
 	private ProductDao productDao;
 	
 	@Autowired
 	private Product product;
 	
-	@Autowired
-	private HttpSession session;
+	@RequestMapping(value="/register", method=RequestMethod.GET)
+	public ModelAndView register(@ModelAttribute RegisterModel registerModel){
+		return new ModelAndView("register");
+			
+	}
+	@RequestMapping(value="/Success",method=RequestMethod.POST)
+	public ModelAndView success(@ModelAttribute RegisterModel registerModel)
+	{
+		ModelAndView mv;
+		String msg;
+		msg="you have registered successfully please login now";
+		registerDao.save(registerModel);
+		mv= new ModelAndView("Success");
+		mv.addObject("msg",msg);
+		return mv;
+		
+	}
 	
-	@RequestMapping("/signin")
-	public ModelAndView login(@RequestParam(value="name") String username,
-			@RequestParam(value="password") String password){
+	@RequestMapping(value="/check")
+	public ModelAndView login(@RequestParam(value="username") String username,
+			@RequestParam(value="password") String password,HttpSession session){
+		System.out.println("login controller");
 		registerModel = registerDao.isValidUser(username, password);
 		ModelAndView mv = null;
 		if(registerModel == null){
-        mv = new ModelAndView ("home");
+        mv = new ModelAndView ("user");
 		mv.addObject("ërror message", "Invalid credentials please try again");
 	} else {
 		if (registerModel.getRole().equals("ROLE_ADMIN")){
-			mv = new ModelAndView("admin");
+			mv = new ModelAndView("contactus");
 		session.setAttribute("categoryList", categoryDao.list());
 		session.setAttribute("supplierList", supplierDao.list());
 		session.setAttribute("productList", productDao.list());
@@ -67,13 +84,28 @@ public class LoginController {
 		session.setAttribute("product", product);
 	}
 	else if (registerModel.getRole().equals("ROLE_USER")){
-			mv = new ModelAndView("home");
+			mv = new ModelAndView("user");
 		session.setAttribute("username", registerModel.getUsername());
 	}
-    }
+	}
 	return mv;	
 	}
-}
 	
+	@RequestMapping("/logout")
+	public ModelAndView logout(HttpServletRequest request,HttpSession session){
+		ModelAndView mv = new ModelAndView("index");
+		session.invalidate();
+		session=request.getSession(true);
+		session.setAttribute("category", category);
+		session.setAttribute("categoryList", categoryDao.list());
+		mv.addObject("logoutmessage","you are successfully logged out");
+		mv.addObject("loggedout", "true");
+		return mv;
+	}
+	@RequestMapping(value="/login")
+	public String login(){
+	return "login";
+	}
 
-
+	
+}
