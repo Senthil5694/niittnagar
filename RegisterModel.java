@@ -1,35 +1,37 @@
-package com.tronicsville.model;
+package com.Model;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
+
 @Entity
-@Table(name="register")
 @Component("register")
 public class RegisterModel {
 	@Id
-	private String id;
-	@NotNull
+	@Column
+	private String username;
+	
+	@Column
 	@Size(min=5 ,max=20)
-	private String username,password;
-	@NotNull
+	private String password;
+
+	@Column
 	private String firstname,lastname,address;
-	@NotNull
+
+	@Column
 	private String emailid;
-	@NotNull
+
+	@Column
 	@Size(min=10, max=10)
 	private String mobilenumber;
 	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	@Column
+	private String  role="ROLE_USER";
+
 	public String getUsername() {
 		return username;
 	}
@@ -72,6 +74,10 @@ public class RegisterModel {
 	public void setMobilenumber(String mobilenumber) {
 		this.mobilenumber = mobilenumber;
 	}
+	public String getRole() {
+		return role;
+	}
+	
 	
 	
 	

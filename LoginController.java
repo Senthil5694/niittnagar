@@ -44,11 +44,9 @@ public class LoginController {
 	
 	@Autowired
 	private Product product;
-	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public ModelAndView register(@ModelAttribute RegisterModel registerModel){
 		return new ModelAndView("register");
-			
 	}
 	@RequestMapping(value="/Success",method=RequestMethod.POST)
 	public ModelAndView success(@ModelAttribute RegisterModel registerModel)
@@ -70,11 +68,11 @@ public class LoginController {
 		registerModel = registerDao.isValidUser(username, password);
 		ModelAndView mv = null;
 		if(registerModel == null){
-        mv = new ModelAndView ("user");
-		mv.addObject("ërror message", "Invalid credentials please try again");
+        mv = new ModelAndView ("login");
+		mv.addObject("msg", "Invalid credentials please try again");
 	} else {
 		if (registerModel.getRole().equals("ROLE_ADMIN")){
-			mv = new ModelAndView("contactus");
+			mv = new ModelAndView("admin");
 		session.setAttribute("categoryList", categoryDao.list());
 		session.setAttribute("supplierList", supplierDao.list());
 		session.setAttribute("productList", productDao.list());
@@ -105,7 +103,7 @@ public class LoginController {
 	@RequestMapping(value="/login")
 	public String login(){
 	return "login";
-	}
+	}	
 
 	
 }

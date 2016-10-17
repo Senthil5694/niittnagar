@@ -8,11 +8,11 @@
 <title>Register</title>
 <style>
 body{
-margin-top:180px;
+margin-top:160px;
 }
 </style>
 </head>
-<body>
+<body bgcolor="#ff3e96">
 <form:form action="Success" method="post" commandName="registerModel">
 
 		<center>
@@ -47,10 +47,10 @@ margin-top:180px;
 
 			<tr>
 				<td><form:label path="password">
-						<spring-message text="password" />
+						<spring-message text="password" type="password" />
 					</form:label> Password:<td>
 				
-				<td><form:input path="password" required="true" title="field shold not be empty" /></td>
+				<td><form:input path="password" required="true"  pattern=".{5,20}" title="Password should contain minimum 5 letters" /></td>
 			</tr>
 			
                   <tr>
@@ -69,7 +69,7 @@ margin-top:180px;
 						<spring-message text="mobilenumber" />
 					</form:label> MobileNumber:<td>
 				
-				<td><form:input type="tel" path="mobilenumber" required="true" title="field shold not be empty" /></td>
+				<td><form:input type="number" path="mobilenumber" required="true" pattern=".{10,10}" title="please enter a valid mobile number" /></td>
 			</tr>
 			
 			<tr>
@@ -90,6 +90,7 @@ margin-top:180px;
 				
 		</table>
 	</form:form>
+	<%@include file="footer.jsp" %>
 </body>
 </html>
 

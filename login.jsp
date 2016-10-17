@@ -12,26 +12,28 @@
 body{
 margin-top:200px;
 }
+.align
+{
+margin-top:200px;
+}
 </style>
 </head>
-<body>
+<div class="align">
+<body background="F:\project\E-commerce project/tree.jpg">
+<center>
+<h1>Login Form</h1>
+<h>${msg}</h>
+<br>
 <c:url var="addAction" value="/check">
 		</c:url>
-<form:form action="${addAction}" method="post">
-<table>			
-<tr>
-<td>Username</td>
-<td><input type="text" name="username"/></td>
-</tr>
-<tr>
-<td>Password</td>
-<td><input type="password" name="password"/></td>
-</tr>
-<tr>
-<td><input type="submit" value="login"/></td>
-</tr>
-				
-</table>
+<form:form action="${addAction}" method="post">		
+Username<br>
+<input type="text" name="username"/><br><br>
+Password<br>
+<input type="password" name="password"/><br>
+<br><input type="submit" value="login"/><br>
 </form:form>
+</center>
 </body>
+</div>
 </html>
