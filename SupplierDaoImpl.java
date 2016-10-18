@@ -1,16 +1,18 @@
-package com.tronicsville.DAO.DaoImpl;
+package com.DaoImpl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tronicsville.DAO.SupplierDao;
-import com.tronicsville.model.Category;
-import com.tronicsville.model.Supplier;
+import com.Dao.SupplierDao;
+import com.Model.Supplier;
+
+@Transactional
 @Repository("supplierDao")
 public class SupplierDaoImpl implements SupplierDao {
 	@Autowired
@@ -21,7 +23,7 @@ public class SupplierDaoImpl implements SupplierDao {
 		
 		this.sessionFactory = sessionFactory;
 	}
-@Transactional
+
 	public boolean save(Supplier supplier) {
 		try
 		{
@@ -33,7 +35,7 @@ public class SupplierDaoImpl implements SupplierDao {
 		}
 		return true;
 	}
-@Transactional
+
 	public boolean update(Supplier supplier) {
 		try
 		{
@@ -46,10 +48,10 @@ public class SupplierDaoImpl implements SupplierDao {
 		return true;	
 	
 	}
-@Transactional
-	public boolean delete(String id) {
+
+	public boolean delete(String sid) {
 	Supplier supplier = new Supplier();
-	supplier.setId(id);
+	supplier.setSid(sid);
 	try
 	{
 		sessionFactory.getCurrentSession().delete(supplier);
@@ -61,9 +63,10 @@ public class SupplierDaoImpl implements SupplierDao {
 	return true;	
 	
 	}
-@Transactional
-	public Supplier get(String id) {
-	String hql = "from Supplier where id =" + "'" + id + "'";
+	
+	
+	public Supplier get(String sid) {
+	String hql = "from Supplier where sid =" + "'" + sid + "'";
 	Query query = sessionFactory.getCurrentSession().createQuery(hql);
 	@SuppressWarnings("unchecked")
 	List<Supplier> list = (List<Supplier>) query.list();
@@ -75,8 +78,14 @@ public class SupplierDaoImpl implements SupplierDao {
 }
 @Transactional
 	public List<Supplier> list() {
-		
-		return null;	
+	@SuppressWarnings("unchecked")
+	List<Supplier> list = (List<Supplier>) 
+	          sessionFactory.getCurrentSession()
+			.createCriteria(Supplier.class)
+			.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+	return list;
+			
 	}
 @Transactional
 public Supplier getByName(String name) {

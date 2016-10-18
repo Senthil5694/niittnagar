@@ -50,7 +50,7 @@ margin-top:160px;
 						<spring-message text="password" type="password" />
 					</form:label> Password:<td>
 				
-				<td><form:input path="password" required="true"  pattern=".{5,20}" title="Password should contain minimum 5 letters" /></td>
+				<td><form:input path="password" required="true" type="password" pattern=".{5,20}" title="Password should contain minimum 5 letters" /></td>
 			</tr>
 			
                   <tr>

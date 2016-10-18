@@ -8,8 +8,8 @@
 </head>
 <body>
 <center>
-<h1>${msg}</h1>
-<a href="login">Login</a>
+<h1 style="color:green">${msg}</h1>
+<h2><a href="login">Login</a></h2>
 </center>
 </body>
 </html>

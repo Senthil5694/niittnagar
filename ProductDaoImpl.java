@@ -1,17 +1,20 @@
-package com.tronicsville.DAO.DaoImpl;
+package com.DaoImpl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tronicsville.DAO.ProductDao;
-import com.tronicsville.model.Category;
-import com.tronicsville.model.Product;
-@Repository
-public class ProductDaoImpl implements ProductDao {
+import com.Dao.ProductDao;
+import com.Model.Product;
+
+@Transactional
+@Repository("productDao")
+public class ProductDaoImpl implements  ProductDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -20,7 +23,7 @@ public class ProductDaoImpl implements ProductDao {
 		
 		this.sessionFactory = sessionFactory;
 	}
-@Transactional
+
 	public boolean save(Product product) {
 		try
 		{
@@ -32,7 +35,6 @@ public class ProductDaoImpl implements ProductDao {
 		}
 		return true;
 	}
-@Transactional
 	public boolean update(Product product) {
 		
 		try
@@ -45,13 +47,13 @@ public class ProductDaoImpl implements ProductDao {
 		}
 		return true;
 	}
-@Transactional
-	public boolean delete(String id) {
-	Category category = new Category();
-	category.setId(id);
+
+	public boolean delete(String pid) {
+	Product product = new Product();
+	product.setPid(pid);
 		try
 		{
-			sessionFactory.getCurrentSession().delete(category);
+			sessionFactory.getCurrentSession().delete(product);
 		}catch (Exception e)
 		{
 	  e.printStackTrace();
@@ -59,15 +61,28 @@ public class ProductDaoImpl implements ProductDao {
 		}
 		return true;
 	}
-@Transactional
-	public Product get(String id) {
-	
-		return null;
+
+	public Product get(String pid) {
+	String hql = "from Product where pid =" + "'" + pid + "'";
+	Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	@SuppressWarnings("unchecked")
+	List<Product> list = (List<Product>) query.list();
+	if(list != null && !list.isEmpty())
+	{
+		return list.get(0);
 	}
-@Transactional
+	return null;
+}
+
 	public List<Product> list() {
-	
-		return null;
+		@SuppressWarnings("unchecked")
+		List<Product> list = (List<Product>) 
+		          sessionFactory.getCurrentSession()
+				.createCriteria(Product.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+		return list;
+		
 	}
 
 }

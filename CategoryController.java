@@ -21,15 +21,17 @@ public class CategoryController {
 	private Category category;
 	
 	
-	@RequestMapping(value="/categorieslist", method=RequestMethod.GET)
+	@RequestMapping("/categories")
 	public String listcategory(Model model){
 	model.addAttribute("category",category);
 	model.addAttribute("categoryList",this.categoryDao.list());
-	return "category";
+	return "categories";
 	}
 	@RequestMapping(value="/addcategories")
-	public ModelAndView addcategory(@ModelAttribute Category category){
+	public ModelAndView addcategory(@ModelAttribute Category category,Model model){
 		boolean flag=categoryDao.save(category);
+		model.addAttribute("category",category);
+		model.addAttribute("categoryList",this.categoryDao.list());
 		ModelAndView mv = new ModelAndView("categories");
 		String msg= "Category added Successfully";
 if(flag!=true)
@@ -40,10 +42,12 @@ mv.addObject("msg", msg);
 return mv;
 
 	}
-	@RequestMapping("/category/remove/{id}")
-	public ModelAndView deletecategory(@PathVariable("id") String id)throws Exception{
+	@RequestMapping("/removecategory/{id}")
+	public ModelAndView deletecategory(@PathVariable("id") String id,Model model)throws Exception{
 		boolean flag = categoryDao.delete(id);
-		ModelAndView mv = new ModelAndView("category");
+		model.addAttribute("category",category);
+		model.addAttribute("categoryList",this.categoryDao.list());
+		ModelAndView mv = new ModelAndView("categories");
 				String msg= "Category Deleted Successfully";
 		if(flag!=true)
 		{
@@ -52,15 +56,14 @@ return mv;
 		mv.addObject("msg", msg);
 		return mv;
 	}
-	@RequestMapping("/category/edit/{id}")
-	public String editcategory(@ModelAttribute("category")Category category){
+	@RequestMapping("/editcategory/{id}")
+	public String editcategory(@ModelAttribute("category")Category category,Model model){
 		categoryDao.update(category);
-		return "category";
+		model.addAttribute("category",category);
+		model.addAttribute("categoryList",this.categoryDao.list());
+		return "categories";
 	}
-	@RequestMapping("/categories")
-	public ModelAndView category(@ModelAttribute Category category){
-		return new ModelAndView("categories");
-	}
+
 	
 
 }

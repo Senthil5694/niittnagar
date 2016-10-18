@@ -137,8 +137,8 @@ display:inline-block;
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 <figure  class="img">
-<img src="F:\project\E-commerce project/dell inspiron 2 in 1.jpg" alt="elephant">
-<figcaption>Dell inspiron
+<img src="F:\project\E-commerce project/dell inspiron 2 in 1.jpg" alt="Smartphone">
+<figcaption>Smart Phone
 </figcaption>
 </figure>
 </div>

@@ -20,15 +20,17 @@ public class SupplierController {
 	@Autowired
 	private SupplierDao supplierDao;
 	
-	@RequestMapping(value="/supplierlist", method=RequestMethod.GET)
+	@RequestMapping(value="/suppliers", method=RequestMethod.GET)
 	public String listsupplier(Model model){
 	model.addAttribute("supplier",supplier);
-	model.addAttribute("supplierDao",this.supplierDao.list());
-	return "supplier";
+	model.addAttribute("supplierList",this.supplierDao.list());
+	return "suppliers";
 	}
 	@RequestMapping(value="/addsupplier")
-	public ModelAndView addsupplier(@ModelAttribute Supplier supplier){
+	public ModelAndView addsupplier(@ModelAttribute Supplier supplier,Model model){
 		boolean flag=supplierDao.save(supplier);
+		model.addAttribute("supplier",supplier);
+		model.addAttribute("supplierList",this.supplierDao.list());
 		ModelAndView mv = new ModelAndView("suppliers");
 		String msg= "Supplier added Successfully";
 if(flag!=true)
@@ -38,25 +40,26 @@ if(flag!=true)
 mv.addObject("msg", msg);
 return mv;
 	}
-	@RequestMapping("/supplier/remove/{id}")
-	public ModelAndView deletesupplier(@PathVariable("id") String id)throws Exception{
+	@RequestMapping("/removesupplier/{id}")
+	public ModelAndView deletesupplier(@PathVariable("id") String id, Model model)throws Exception{
 		boolean flag = supplierDao.delete(id);
-		ModelAndView mv = new ModelAndView("supplier");
-				String msg= "Successfull done the operation";
+		model.addAttribute("supplier",supplier);
+		model.addAttribute("supplierList",this.supplierDao.list());
+		ModelAndView mv = new ModelAndView("suppliers");
+				String msg= "Successfully deleted";
 		if(flag!=true)
 		{
 			msg = "operation could not success";
 		}
 		mv.addObject("msg", msg);
-		return mv;
-	}
-	@RequestMapping("/supplier/edit/{id}")
-	public String editsupplier(@ModelAttribute("supplier")Supplier supplier){
-		supplierDao.update(supplier);
-		return "supplier";
-	}
-	@RequestMapping("/suppliers")
-	public ModelAndView category(@ModelAttribute Supplier supplier){
 		return new ModelAndView("suppliers");
 	}
+	@RequestMapping("editsupplier/{id}")
+	public String editsupplier(@ModelAttribute("supplier")Supplier supplier,Model model){
+		supplierDao.update(supplier);
+		model.addAttribute("supplier",supplier);
+		model.addAttribute("supplierList",this.supplierDao.list());
+		return "suppliers";
+	}
+
 }
