@@ -1,21 +1,31 @@
-package com.tronicsville.model;
+package com.Model;
 
+import java.util.Set;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.util.Set;
+
 import org.springframework.stereotype.Component;
 
+import com.Model.Product;
+
 @Entity
-@Table (name="category")
 @Component
 public class Category {
 	@Id
-	private String id;
-	private String name;
-	private String description;
+	@Column
+	private String cid;
+	
+	@Column
+	private String cname;
+	
+	@Column
+	private String cdescription;
+	
+	
 	@OneToMany(mappedBy="category" ,fetch=FetchType.EAGER)
 	private Set<Product> products;
 	public Set<Product> getproducts(){
@@ -24,25 +34,23 @@ public class Category {
 	public void setproducts(Set<Product> products){
 		this.products=products;
 	}
-	public String getId() {
-		return id;
+	public String getCid() {
+		return cid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setCid(String cid) {
+		this.cid = cid;
 	}
-	public String getName() {
-		return name;
+	public String getCname() {
+		return cname;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCname(String cname) {
+		this.cname = cname;
 	}
-	public String getDescription() {
-		return description;
+	public String getCdescription() {
+		return cdescription;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCdescription(String cdescription) {
+		this.cdescription = cdescription;
 	}
 	
-	
-
 }

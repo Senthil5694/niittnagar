@@ -11,16 +11,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.Dao.SupplierDao;
 import com.Model.Supplier;
+import com.Util.Util;
 
 @Controller
 public class SupplierController {
-	@Autowired
+	@Autowired(required=true)
 	private Supplier supplier;
 	
-	@Autowired
+	@Autowired(required=true)
 	private SupplierDao supplierDao;
 	
-	@RequestMapping(value="/suppliers", method=RequestMethod.GET)
+	@RequestMapping(value="/suppliers")
 	public String listsupplier(Model model){
 	model.addAttribute("supplier",supplier);
 	model.addAttribute("supplierList",this.supplierDao.list());
@@ -28,19 +29,21 @@ public class SupplierController {
 	}
 	@RequestMapping(value="/addsupplier")
 	public String addsupplier(@ModelAttribute Supplier supplier,Model model){
-		boolean flag=supplierDao.save(supplier);
-	ModelAndView mv = new ModelAndView();
+		String newsid = Util.removeComma(supplier.getSid());
+		supplier.setSid(newsid);
+	supplierDao.saveOrUpdate(supplier);
+	/*ModelAndView mv = new ModelAndView();
 		String msg= "Supplier added Successfully";
 if(flag!=true)
 {
 	msg = "operation could not success";
 }
-mv.addObject("msg", msg);
+mv.addObject("msg", msg);*/
 return "redirect:/suppliers";
 	}
-	@RequestMapping("/removesupplier/{id}")
-	public String deletesupplier(@PathVariable("id") String id, Model model)throws Exception{
-		boolean flag = supplierDao.delete(id);
+	@RequestMapping("/removesupplier/{sid}")
+	public String deletesupplier(@PathVariable("sid") String sid, Model model)throws Exception{
+		boolean flag = supplierDao.delete(sid);
 		ModelAndView mv = new ModelAndView();
 				String msg= "Successfully deleted";
 		if(flag!=true)
@@ -50,10 +53,9 @@ return "redirect:/suppliers";
 		mv.addObject("msg", msg);
 		return "redirect:/suppliers";
 	}
-	@RequestMapping("editsupplier/{id}")
-	public String editsupplier(@ModelAttribute("supplier")Supplier supplier,Model model){
-		supplierDao.update(supplier);
-		model.addAttribute("supplier",supplier);
+	@RequestMapping("/editsupplier/{sid}")
+	public String editsupplier(@PathVariable("sid")String sid,Model model){
+		model.addAttribute("supplier",this.supplierDao.get(sid));
 		model.addAttribute("supplierList",this.supplierDao.list());
 		return "suppliers";
 	}

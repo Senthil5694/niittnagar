@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.Dao.CategoryDao;
 import com.Model.Category;
+import com.Util.Util;
 
 @Controller
 public class CategoryController {
@@ -26,17 +27,19 @@ public class CategoryController {
 	model.addAttribute("categoryList",this.categoryDao.list());
 	return "categories";
 	}
-	@RequestMapping(value="/addcategories")
+	@RequestMapping(value="/addcategory")
 	public String addcategory(@ModelAttribute Category category,Model model){
-		boolean flag=categoryDao.save(category);
-	ModelAndView mv = new ModelAndView("categories");
-	String msg="category added successfully";
+		String newcid = Util.removeComma(category.getCid());
+		category.setCid(newcid);
+		categoryDao.saveOrUpdate(category);
+	/*ModelAndView mv = new ModelAndView("categories");*/
+	/*String msg="category added successfully";
 		model.addAttribute(msg,"category added successfully");
       if(flag!=true)
      {
 	msg = "operation could not success";
     }
-   mv.addObject("msg", msg);
+   mv.addObject("msg", msg);*/
     return "redirect:/categories";
 
 	}
@@ -53,12 +56,12 @@ public class CategoryController {
 		return "redirect:/categories";
 	}
 	@RequestMapping("/editcategory/{cid}")
-	public String editcategory(@ModelAttribute("category")Category category,Model model){
-		categoryDao.update(category);
-		model.addAttribute("category",category);
+	public String editcategory(@PathVariable("cid")String cid,Model model){
+		model.addAttribute("category",this.categoryDao.get(cid));
 		model.addAttribute("categoryList",this.categoryDao.list());
 		return "categories";
 	}
+
 
 	
 

@@ -1,26 +1,41 @@
-package com.tronicsville.model;
+package com.Model;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.Model.Category;
+import com.Model.Supplier;
+
 @Entity
-@Table(name="product")
 @Component
 public class Product {
 	@Id
-	private String id;
+	@Column
+	private String pid;
+	
+	@Column
 	private String name;
-	private String price;
+	
+	@Column
+	private int price;
+	
+	@Column
+	private String description;
+	
+	@Column
 	private String supplier_id;
+	
+	@Column
 	private String category_id;
+	
+	
 	public String getSupplier_id() {
 		return supplier_id;
 	}
@@ -54,18 +69,13 @@ public class Product {
 	private Supplier supplier;
 	@Transient
 	private MultipartFile image;
-	
-	public MultipartFile getImage() {
-		return image;
+
+
+	public String getPid() {
+		return pid;
 	}
-	public void setImage(MultipartFile image) {
-		this.image = image;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
+	public void setPid(String pid) {
+		this.pid = pid;
 	}
 	public String getName() {
 		return name;
@@ -73,13 +83,23 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public MultipartFile getImage() {
+		return image;
+	}
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
 	
-	
-
 }

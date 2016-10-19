@@ -1,20 +1,28 @@
-package com.tronicsville.model;
+package com.Model;
 
+import java.util.Set;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.util.Set;
+
 import org.springframework.stereotype.Component;
 
+import com.Model.Product;
+
 @Entity
-@Table(name="supplier")
 @Component
 public class Supplier {
 	@Id
-	private String id;
+	@Column
+	private String sid;
+	
+	@Column
 	private String name;
+	
+	@Column
 	private String address;
 	@OneToMany(mappedBy="supplier" ,fetch=FetchType.EAGER)
 	private Set<Product> products;
@@ -24,11 +32,11 @@ public class Supplier {
 	public void setproducts(Set<Product> products){
 		this.products=products;
 	}
-	public String getId() {
-		return id;
+	public String getSid() {
+		return sid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setSid(String sid) {
+		this.sid = sid;
 	}
 	public String getName() {
 		return name;
@@ -42,6 +50,5 @@ public class Supplier {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
 
 }

@@ -1,58 +1,84 @@
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page session="false"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Categories</title>
+<title>Category</title>
+<style>
+.cat{
+margin-left:600px;
+}
+</style>
 </head>
-<body>
 <%@include file="admin.jsp" %>
-<center>
-<form:form action="addcategories" method="POST" commandName="category">
+<body>
+<div class="cat">
+	<h1>Categories</h1>
 
-		<center>
-			<h1>Categories</h1>
-			<p>${msg}</p>
-		</center>
+	<c:url var="addAction" value="/addcategory"></c:url>
+
+	<form:form action="${addAction}" commandName="category">
 		<table>
-		<tr>
-		<td>Category id</td>
-		<td><input type="text" name="cid" required/></td>
-		</tr>
-		<tr>
-		<td>Category name</td>
-		<td><input type="text" name="cname" required/></td>
-		</tr>
-		<tr>
-		<td>Category description</td>
-		<td><input type="text" name="cdescription" required/></td>
-		</tr>
-		<tr>
-		<td></td>
-		<td><input type="submit" value="AddCategory"/></td>
-		</tr>
+			<tr>
+				<td><form:label path="cid">
+						<spring:message text="Category Id" />
+					</form:label></td>
+				<c:choose>
+					<c:when test="${!empty category.cid}">
+						<td><form:input path="cid" disabled="true" readonly="true" />
+						</td>
+					</c:when>
+
+					<c:otherwise>
+						<td><form:input path="cid" required="true"/></td>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+			<form:input path="cid" hidden="true"  />
+				<td><form:label path="cname">
+						<spring:message text="Category Name" />
+					</form:label></td>
+				<td><form:input path="cname" required="true" /></td>
+			</tr>
+			<tr>
+				<td><form:label path="cdescription">
+						<spring:message text="Category Description" />
+					</form:label></td>
+				<td><form:input path="cdescription" required="true" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><c:if test="${!empty category.cname}">
+						<input type="submit"
+							value="<spring:message text="Edit Category"/>" />
+					</c:if> <c:if test="${empty category.cname}">
+						<input type="submit" value="<spring:message text="Add Category"/>" />
+					</c:if></td>
+			</tr>
 		</table>
-		</form:form>
-		</center>
-	<table>
-	<tr>
-	<th>Category Id</th>
-	<th>Category Name</th>
-	<th>Category Description</th>
-	</tr>
-	<c:forEach items="${categoryList}" var="category">
-	<tr>
-	<td>"${category.cid}"</td>
-	<td>"${category.cname}"</td>
-	<td>"${category.cdescription}"</td>
-	<td><a href="<c:url value='/editcategory/${category.cid}' />">Edit</a></td>
-	<td><a href="<c:url value='/removecategory/${category.cid}' />">Remove</a></td>
-	</tr>
-	</c:forEach>
-	</table>
+	</form:form>
+	</div>
+	<br>
+	<h3>Categories List</h3>
+	<c:if test="${!empty categoryList}">
+		<table class="tg">
+			<tr>
+				<th width="80">Category ID</th>
+				<th width="120">Category Name</th>
+				<th width="120">Category Description</th>
+				<th width="60">Edit</th>
+				<th width="60">Delete</th>
+			</tr>
+			<c:forEach items="${categoryList}" var="category">
+				<tr>
+					<td>${category.cid}</td>
+					<td>${category.cname}</td>
+					<td>${category.cdescription}</td>
+					<td><a href="<c:url value='editcategory/${category.cid}' />">Edit</a></td>
+					<td><a href="<c:url value='removecategory/${category.cid}' />">Delete</a></td>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
 </body>
 </html>

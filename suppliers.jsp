@@ -1,58 +1,84 @@
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page session="false"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Suppliers</title>
+<title>Supplier</title>
+<style>
+.sup{
+margin-left:600px;
+}
+</style>
 </head>
-<body>
 <%@include file="admin.jsp" %>
-<form:form action="addsupplier" method="POST" commandName="supplier">
+<body>
+<div class="sup">
+	<h1>Suppliers</h1>
 
-		<center>
-			<h1>Suppliers</h1>
-			<p>${msg}</p>
-		</center>
-		<center>
+	<c:url var="addAction" value="/addsupplier"></c:url>
+
+	<form:form action="${addAction}" commandName="supplier">
 		<table>
-		<tr>
-		<td>Supplier id</td>
-		<td><input type="text" name="sid" required/></td>
-		</tr>
-		<tr>
-		<td>Supplier Name</td>
-		<td><input type="text" name="name" required/></td>
-		</tr>
-		<tr>
-		<td>Supplier Address</td>
-		<td><input type="text" name="address" required/></td>
-		</tr>
-		<tr>
-		<td></td>
-		<td><input type="submit" value="AddSupplier" required/></td>
-		</tr>
+			<tr>
+				<td><form:label path="sid">
+						<spring:message text="Supplier ID" />
+					</form:label></td>
+				<c:choose>
+					<c:when test="${!empty supplier.sid}">
+						<td><form:input path="sid" disabled="true" readonly="true" />
+						</td>
+					</c:when>
+
+					<c:otherwise>
+						<td><form:input path="sid" required="true"/></td>
+					</c:otherwise>
+				</c:choose>
+			<tr>
+			<form:input path="sid" hidden="true"  />
+				<td><form:label path="name">
+						<spring:message text="Supplier Name" />
+					</form:label></td>
+				<td><form:input path="name" required="true" /></td>
+			</tr>
+			<tr>
+				<td><form:label path="address">
+						<spring:message text="Supplier Address" />
+					</form:label></td>
+				<td><form:input path="address" required="true" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><c:if test="${!empty supplier.name}">
+						<input type="submit"
+							value="<spring:message text="Edit Supplier"/>" />
+					</c:if> <c:if test="${empty supplier.name}">
+						<input type="submit" value="<spring:message text="Add Supplier"/>" />
+					</c:if></td>
+			</tr>
 		</table>
-		</center>
 	</form:form>
-	<table>
-	<tr>
-	<th>Supplier Id</th>
-	<th>Supplier Name</th>
-	<th>Supplier Address</th>
-	</tr>
-	<c:forEach items="${supplierList}" var="supplier">
-	<tr>
-	<td>"${supplier.sid}"</td>
-	<td>"${supplier.name}"</td>
-	<td>"${supplier.address}"</td>
-	<td><a href="<c:url value='/editsupplier/${supplier.sid}' />">Edit</a></td>
-	<td><a href="<c:url value='/removesupplier/${supplier.sid}' />">Remove</a></td>
-	</tr>
-	</c:forEach>
-	</table>
+	</div>
+	<br>
+	<h3>Supplier List</h3>
+	<c:if test="${!empty supplierList}">
+		<table class="tg">
+			<tr>
+				<th width="80">Supplier Id</th>
+				<th width="120">Supplier Name</th>
+				<th width="120">Supplier Address</th>
+				<th width="60">Edit</th>
+				<th width="60">Delete</th>
+			</tr>
+			<c:forEach items="${supplierList}" var="supplier">
+				<tr>
+					<td>${supplier.sid}</td>
+					<td>${supplier.name}</td>
+					<td>${supplier.address}</td>
+					<td><a href="<c:url value='editsupplier/${supplier.sid}' />">Edit</a></td>
+					<td><a href="<c:url value='removesupplier/${supplier.sid}' />">Delete</a></td>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
 </body>
 </html>

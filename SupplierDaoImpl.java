@@ -90,7 +90,7 @@ public class SupplierDaoImpl implements SupplierDao {
 @Transactional
 public Supplier getByName(String name) {
 
-	String hql = "from Supplier where name=" + "'"+ name+"'";
+	String hql = "from Supplier where name=" + "'"+ name +"'";
 	Query query = sessionFactory.getCurrentSession().createQuery(hql);
 	
 	@SuppressWarnings("unchecked")
@@ -104,16 +104,9 @@ public Supplier getByName(String name) {
 	
 }
 
-public boolean saveOrUpdate(Supplier supplier) {
-	try
-	{
+public void saveOrUpdate(Supplier supplier) {
 		sessionFactory.getCurrentSession().saveOrUpdate(supplier);
-	}catch (Exception e)
-	{
-   e.printStackTrace();
-   return false;
-	}
-	return true;	
+	
 
 }
 

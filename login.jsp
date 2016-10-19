@@ -27,7 +27,7 @@ margin-top:150px;
 <body background="F:\project\E-commerce project/tree.jpg">
 <center>
 <h1>Login Form</h1>
-<h>${msg}</h>
+<h style="color:red">${msg}</h>
 <br>
 <c:url var="addAction" value="/check">
 		</c:url>

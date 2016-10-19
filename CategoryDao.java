@@ -1,12 +1,15 @@
-package com.tronicsville.DAO;
+package com.Dao;
+
 import java.util.List;
-import com.tronicsville.model.Category;
-public interface CategoryDao { 
+
+import com.Model.Category;
+
+public interface CategoryDao {
 	public boolean save(Category category);
 	public boolean update(Category category);
-	public boolean delete(String id);
-	public Category get(String id);
+	public boolean delete(String cid);
+	public Category get(String cid);
 	public List<Category> list();
-	public Category getByName(String name);
-
+	public Category getByName(String cname);
+	public void saveOrUpdate(Category category);
 }

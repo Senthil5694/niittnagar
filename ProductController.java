@@ -1,5 +1,10 @@
 package com.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,25 +38,41 @@ public class ProductController {
 	
 	private String path = "F:\\tronicsville\\image";
 	
-	@RequestMapping(value="/products", method = RequestMethod.GET)
+	@RequestMapping(value="/products")
 	public String listProducts(Model model)	{
 		model.addAttribute("product",new  Product());
 		model.addAttribute("category", new Category());
 		model.addAttribute("supplier",new Supplier());
-		model.addAttribute("productlist",  this.productDao.list());
-		model.addAttribute("categorylist", this.categoryDao.list());
-		model.addAttribute("'supplierlist", this.supplierDao.list());
+		model.addAttribute("productList",  this.productDao.list());
+		model.addAttribute("categoryList", this.categoryDao.list());
+		model.addAttribute("supplierList", this.supplierDao.list());
 		return "products";
 	}
 	
-	@RequestMapping(value="/addproduct", method=RequestMethod.POST)
-	public String addProduct(@ModelAttribute("product")Product product,@RequestParam("image") MultipartFile file){
+	@RequestMapping(value="/addproduct",method=RequestMethod.POST)
+	public String addProduct(@ModelAttribute("product")Product product,Model model){
 	Category category = categoryDao.getByName(product.getCategory().getCname());
+	categoryDao.saveOrUpdate(category);
 	Supplier supplier = supplierDao.getByName(product.getSupplier().getName());
+	supplierDao.saveOrUpdate(supplier);
+	MultipartFile image=product.getImage();
+	Path path=Paths.get("/images/"+product.getName()+".jpg");
+	System.out.println(path.toString());
+	if(image!=null && !image.isEmpty()){
+		try{
+			System.out.println("inside try image");
+			image.transferTo(new File(path.toString()));
+		}catch (IOException e){
+			e.printStackTrace();
+			throw new RuntimeException("product image saving failed",e);
+		}
+	}
 	product.setCategory(category);
 	product.setSupplier(supplier);
-	productDao.save(product);
-	FileUtil.upload(path , file , product.getPid() + ".jpg");
+	product.setCategory_id(category.getCid());
+	product.setSupplier_id(supplier.getSid());
+	productDao.saveOrUpdate(product);
+	model.addAttribute("productList",this.productDao.list());
 	return "products";
 	}
 	@RequestMapping("/removeproduct/{id}")
@@ -63,13 +84,13 @@ public class ProductController {
 			model.addAttribute("message", e.getMessage());
 			e.printStackTrace();
 		}
-		return "products";
+		return "redirect:/products";
 		}
 		@RequestMapping("editproduct/{id}")
 		public String editproduct(@PathVariable("id") String id, Model model){
 			System.out.println("editproduct");
 			model.addAttribute("product", this.productDao.get(id));
-			model.addAttribute("listproducts", this.productDao.list());
+			model.addAttribute("productList", this.productDao.list());
 			model.addAttribute("categoryList", this.categoryDao.list());
 			model.addAttribute("supplierList", this.supplierDao.list());
 			return "products";		
@@ -77,6 +98,7 @@ public class ProductController {
 		@RequestMapping("/getproduct/{id}")
 		public String getSelectedProduct(@PathVariable("id") String id,Model model,RedirectAttributes redirectattributes){
 			redirectattributes.addFlashAttribute("selectedProduct", productDao.get(id));
+			model.addAttribute("categoryList",this.categoryDao.list());
 			return "product";
 			
 		}
