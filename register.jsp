@@ -10,9 +10,13 @@
 body{
 margin-top:160px;
 }
+.footer{
+margin-top:235px;
+}
 </style>
 </head>
-<body bgcolor="#ff3e96">
+<%@include file="header.jsp" %>
+<body background="F:\project\E-commerce project/bag flowers.jpg">
 <form:form action="Success" method="post" commandName="registerModel">
 
 		<center>
@@ -90,7 +94,9 @@ margin-top:160px;
 				
 		</table>
 	</form:form>
-	<%@include file="footer.jsp" %>
 </body>
+<div class="footer">
+<%@include file="footer.jsp" %>
+</div>
 </html>
 

@@ -39,11 +39,13 @@ public class LoginController {
 	
 	@Autowired
 	private Supplier supplier;
+	
 	@Autowired
 	private ProductDao productDao;
 	
 	@Autowired
 	private Product product;
+	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public ModelAndView register(@ModelAttribute RegisterModel registerModel){
 		return new ModelAndView("register");
@@ -91,7 +93,7 @@ public class LoginController {
 	
 	@RequestMapping("/logout")
 	public ModelAndView logout(HttpServletRequest request,HttpSession session){
-		ModelAndView mv = new ModelAndView("index");
+		ModelAndView mv = new ModelAndView("home");
 		session.invalidate();
 		session=request.getSession(true);
 		session.setAttribute("category", category);

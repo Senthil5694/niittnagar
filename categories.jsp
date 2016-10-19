@@ -10,6 +10,7 @@
 <title>Categories</title>
 </head>
 <body>
+<%@include file="admin.jsp" %>
 <center>
 <form:form action="addcategories" method="POST" commandName="category">
 
@@ -20,19 +21,19 @@
 		<table>
 		<tr>
 		<td>Category id</td>
-		<td><input type="text" name="cid"/></td>
+		<td><input type="text" name="cid" required/></td>
 		</tr>
 		<tr>
 		<td>Category name</td>
-		<td><input type="text" name="cname"/></td>
+		<td><input type="text" name="cname" required/></td>
 		</tr>
 		<tr>
 		<td>Category description</td>
-		<td><input type="text" name="cdescription"/></td>
+		<td><input type="text" name="cdescription" required/></td>
 		</tr>
 		<tr>
 		<td></td>
-		<td><input type="submit" value="Addcategory"/></td>
+		<td><input type="submit" value="AddCategory"/></td>
 		</tr>
 		</table>
 		</form:form>
@@ -49,7 +50,7 @@
 	<td>"${category.cname}"</td>
 	<td>"${category.cdescription}"</td>
 	<td><a href="<c:url value='/editcategory/${category.cid}' />">Edit</a></td>
-	<td><a href="<c:url value='/removecategory/${category.cid}' />">remove</a></td>
+	<td><a href="<c:url value='/removecategory/${category.cid}' />">Remove</a></td>
 	</tr>
 	</c:forEach>
 	</table>

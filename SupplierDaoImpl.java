@@ -104,4 +104,17 @@ public Supplier getByName(String name) {
 	
 }
 
+public boolean saveOrUpdate(Supplier supplier) {
+	try
+	{
+		sessionFactory.getCurrentSession().saveOrUpdate(supplier);
+	}catch (Exception e)
+	{
+   e.printStackTrace();
+   return false;
+	}
+	return true;	
+
+}
+
 }

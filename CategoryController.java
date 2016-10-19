@@ -20,7 +20,6 @@ public class CategoryController {
 	@Autowired(required=true)
 	private Category category;
 	
-	
 	@RequestMapping("/categories")
 	public String listcategory(Model model){
 	model.addAttribute("category",category);
@@ -28,25 +27,22 @@ public class CategoryController {
 	return "categories";
 	}
 	@RequestMapping(value="/addcategories")
-	public ModelAndView addcategory(@ModelAttribute Category category,Model model){
+	public String addcategory(@ModelAttribute Category category,Model model){
 		boolean flag=categoryDao.save(category);
-		model.addAttribute("category",category);
-		model.addAttribute("categoryList",this.categoryDao.list());
-		ModelAndView mv = new ModelAndView("categories");
-		String msg= "Category added Successfully";
-if(flag!=true)
-{
+	ModelAndView mv = new ModelAndView("categories");
+	String msg="category added successfully";
+		model.addAttribute(msg,"category added successfully");
+      if(flag!=true)
+     {
 	msg = "operation could not success";
-}
-mv.addObject("msg", msg);
-return mv;
+    }
+   mv.addObject("msg", msg);
+    return "redirect:/categories";
 
 	}
-	@RequestMapping("/removecategory/{id}")
-	public ModelAndView deletecategory(@PathVariable("id") String id,Model model)throws Exception{
+	@RequestMapping("/removecategory/{cid}")
+	public String deletecategory(@PathVariable("cid") String id,Model model)throws Exception{
 		boolean flag = categoryDao.delete(id);
-		model.addAttribute("category",category);
-		model.addAttribute("categoryList",this.categoryDao.list());
 		ModelAndView mv = new ModelAndView("categories");
 				String msg= "Category Deleted Successfully";
 		if(flag!=true)
@@ -54,9 +50,9 @@ return mv;
 			msg = "operation could not success";
 		}
 		mv.addObject("msg", msg);
-		return mv;
+		return "redirect:/categories";
 	}
-	@RequestMapping("/editcategory/{id}")
+	@RequestMapping("/editcategory/{cid}")
 	public String editcategory(@ModelAttribute("category")Category category,Model model){
 		categoryDao.update(category);
 		model.addAttribute("category",category);

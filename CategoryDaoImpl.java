@@ -106,7 +106,16 @@ public Category getByName(String cname) {
 	
 	return null;
 }
-	
-	
 
+public boolean saveOrUpdate(Category category) {
+	try
+	{
+		sessionFactory.getCurrentSession().saveOrUpdate(category);	
+	}catch (Exception e)
+	{
+	e.printStackTrace();
+	return false;
+}
+	return true;
+}
 }

@@ -9,14 +9,19 @@
 ul li{
 display:inline;
 padding-left:50px;
-}
-ul li a:hover{
-color:red;
-text-transform:uppercase;
+margin-left:120px;
+color:white;
 }
 h2
 {
 color:green;
+}
+.container{
+background-color:lightgreen;
+}
+ul li a:hover{
+color:red;
+text-transform:uppercase;
 }
 </style>
 </head>
@@ -24,10 +29,13 @@ color:green;
 <center>
 <h2>Welcome Admin</h2>
 </center>
+<div class="container">
 <ul>
 <li><a href="categories">Manage Categories</a></li>
 <li><a href="suppliers">Manage Suppliers</a></li>
 <li><a href="products">Manage Products</a></li>
+<li><a href="logout">Log out</a></li>
 </ul>
+</div>
 </body>
 </html>

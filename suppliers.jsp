@@ -10,6 +10,7 @@
 <title>Suppliers</title>
 </head>
 <body>
+<%@include file="admin.jsp" %>
 <form:form action="addsupplier" method="POST" commandName="supplier">
 
 		<center>
@@ -20,19 +21,19 @@
 		<table>
 		<tr>
 		<td>Supplier id</td>
-		<td><input type="text" name="sid"/></td>
+		<td><input type="text" name="sid" required/></td>
 		</tr>
 		<tr>
 		<td>Supplier Name</td>
-		<td><input type="text" name="name"/></td>
+		<td><input type="text" name="name" required/></td>
 		</tr>
 		<tr>
 		<td>Supplier Address</td>
-		<td><input type="text" name="address"/></td>
+		<td><input type="text" name="address" required/></td>
 		</tr>
 		<tr>
 		<td></td>
-		<td><input type="submit" value="Addsupplier"/></td>
+		<td><input type="submit" value="AddSupplier" required/></td>
 		</tr>
 		</table>
 		</center>
@@ -49,7 +50,7 @@
 	<td>"${supplier.name}"</td>
 	<td>"${supplier.address}"</td>
 	<td><a href="<c:url value='/editsupplier/${supplier.sid}' />">Edit</a></td>
-	<td><a href="<c:url value='/removesupplier/${supplier.sid}' />">remove</a></td>
+	<td><a href="<c:url value='/removesupplier/${supplier.sid}' />">Remove</a></td>
 	</tr>
 	</c:forEach>
 	</table>

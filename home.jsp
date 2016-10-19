@@ -1,4 +1,6 @@
-<doctypehtml>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -63,10 +65,6 @@ ul.icons li
 {
 display:inline-block;
 }
-nav{
-display:inline;
-text-decoration:none;
-}
 </style>
 </head>
 <body bgcolor=lightgreen>
@@ -79,8 +77,6 @@ text-decoration:none;
 </ul>
 <h1>Tronicsville</h1>
 <hr>
-<nav>
-<h3>Welcome:${username}</h3>
 <ul class="menu-new">
 <li><a href="aboutus">about us</a></li>
 <li><a href="contactus">contact us</a></li>
@@ -88,8 +84,8 @@ text-decoration:none;
 <ul class="drop">
 <li><a href="mobiles">mobiles</a></li>
 <li><a href="laptops">laptops</a></li>
-<li><a href="#">tabs</a></li>
-<li><a href="#">home appliances</a></li>
+<li><a href="tabs">tabs</a></li>
+<li><a href="homeappliances">home appliances</a></li>
 </ul>
 </li>
 <li><a href="login">signin</a></li>
@@ -142,8 +138,8 @@ text-decoration:none;
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 <figure  class="img">
-<img src="F:\project\E-commerce project/dell inspiron 2 in 1.jpg" alt="Smartphone">
-<figcaption>Smart Phone
+<img src="F:\project\E-commerce project/dell inspiron 2 in 1.jpg" alt="elephant">
+<figcaption>Dell inspiron
 </figcaption>
 </figure>
 </div>

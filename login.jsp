@@ -10,14 +10,19 @@
 <title>Login</title>
 <style>
 body{
-margin-top:200px;
+margin-top:30px;
 }
 .align
 {
-margin-top:200px;
+margin-top:50px;
+}
+.footer
+{
+margin-top:150px;
 }
 </style>
 </head>
+<%@include file="header.jsp" %>
 <div class="align">
 <body background="F:\project\E-commerce project/tree.jpg">
 <center>
@@ -27,13 +32,16 @@ margin-top:200px;
 <c:url var="addAction" value="/check">
 		</c:url>
 <form:form action="${addAction}" method="post">		
-Username<br>
-<input type="text" name="username"/><br><br>
-Password<br>
+<h2 style="color:blue">Username</h2><br>
+<input type="text" name="username"/><br>
+<h2 style="color:blue">Password</h2><br>
 <input type="password" name="password"/><br>
-<br><input type="submit" value="login"/><br>
+<input type="submit" value="Login"/><br>
 </form:form>
 </center>
 </body>
+</div>
+<div class="footer">
+<%@include file="footer.jsp" %>
 </div>
 </html>

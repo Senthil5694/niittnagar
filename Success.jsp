@@ -5,11 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Success</title>
+<style>
+h2:hover{
+color;blue;
+}
+</style>
 </head>
 <body>
+<%@include file="header.jsp" %>
 <center>
 <h1 style="color:green">${msg}</h1>
-<h2><a href="login">Login</a></h2>
+<h2><a href="login">Login now</a></h2>
 </center>
 </body>
 </html>

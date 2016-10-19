@@ -27,32 +27,28 @@ public class SupplierController {
 	return "suppliers";
 	}
 	@RequestMapping(value="/addsupplier")
-	public ModelAndView addsupplier(@ModelAttribute Supplier supplier,Model model){
+	public String addsupplier(@ModelAttribute Supplier supplier,Model model){
 		boolean flag=supplierDao.save(supplier);
-		model.addAttribute("supplier",supplier);
-		model.addAttribute("supplierList",this.supplierDao.list());
-		ModelAndView mv = new ModelAndView("suppliers");
+	ModelAndView mv = new ModelAndView();
 		String msg= "Supplier added Successfully";
 if(flag!=true)
 {
 	msg = "operation could not success";
 }
 mv.addObject("msg", msg);
-return mv;
+return "redirect:/suppliers";
 	}
 	@RequestMapping("/removesupplier/{id}")
-	public ModelAndView deletesupplier(@PathVariable("id") String id, Model model)throws Exception{
+	public String deletesupplier(@PathVariable("id") String id, Model model)throws Exception{
 		boolean flag = supplierDao.delete(id);
-		model.addAttribute("supplier",supplier);
-		model.addAttribute("supplierList",this.supplierDao.list());
-		ModelAndView mv = new ModelAndView("suppliers");
+		ModelAndView mv = new ModelAndView();
 				String msg= "Successfully deleted";
 		if(flag!=true)
 		{
 			msg = "operation could not success";
 		}
 		mv.addObject("msg", msg);
-		return new ModelAndView("suppliers");
+		return "redirect:/suppliers";
 	}
 	@RequestMapping("editsupplier/{id}")
 	public String editsupplier(@ModelAttribute("supplier")Supplier supplier,Model model){

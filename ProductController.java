@@ -41,10 +41,10 @@ public class ProductController {
 		model.addAttribute("productlist",  this.productDao.list());
 		model.addAttribute("categorylist", this.categoryDao.list());
 		model.addAttribute("'supplierlist", this.supplierDao.list());
-		return "product";
+		return "products";
 	}
 	
-	@RequestMapping(value="/product/add", method=RequestMethod.POST)
+	@RequestMapping(value="/addproduct", method=RequestMethod.POST)
 	public String addProduct(@ModelAttribute("product")Product product,@RequestParam("image") MultipartFile file){
 	Category category = categoryDao.getByName(product.getCategory().getCname());
 	Supplier supplier = supplierDao.getByName(product.getSupplier().getName());
@@ -52,9 +52,9 @@ public class ProductController {
 	product.setSupplier(supplier);
 	productDao.save(product);
 	FileUtil.upload(path , file , product.getPid() + ".jpg");
-	return "product";
+	return "products";
 	}
-	@RequestMapping("/product/remove/{id}")
+	@RequestMapping("/removeproduct/{id}")
 	public String deleteProduct(@PathVariable("id") String id,ModelMap model)throws Exception{
 		try{
 			productDao.delete(id);
@@ -63,18 +63,18 @@ public class ProductController {
 			model.addAttribute("message", e.getMessage());
 			e.printStackTrace();
 		}
-		return "product";
+		return "products";
 		}
-		@RequestMapping("product/edit/{id}")
+		@RequestMapping("editproduct/{id}")
 		public String editproduct(@PathVariable("id") String id, Model model){
 			System.out.println("editproduct");
 			model.addAttribute("product", this.productDao.get(id));
 			model.addAttribute("listproducts", this.productDao.list());
 			model.addAttribute("categoryList", this.categoryDao.list());
 			model.addAttribute("supplierList", this.supplierDao.list());
-			return "product";		
+			return "products";		
 	}
-		@RequestMapping("/product/get/{id}")
+		@RequestMapping("/getproduct/{id}")
 		public String getSelectedProduct(@PathVariable("id") String id,Model model,RedirectAttributes redirectattributes){
 			redirectattributes.addFlashAttribute("selectedProduct", productDao.get(id));
 			return "product";
