@@ -15,10 +15,11 @@ margin-left:600px;
 <body>
 <div class="pro">
 	<h1>Products</h1>
+	<h2>${msg}</h2>
 
 	<c:url var="addAction" value="/addproduct"></c:url>
 
-	<form:form action="${addAction}" enctype="multipart/form-data" commandName="product">
+	<form:form action="${addAction}" method="post" enctype="multipart/form-data" commandName="product">
 		<table>
 			<tr>
 				<td><form:label path="pid">
@@ -72,9 +73,14 @@ margin-left:600px;
 				<td><form:select path="category.cname" items="${categoryList}" itemValue="cname" itemLabel="cname" /></td>
 			</tr>
 			<tr>
-		<td><form:label path="image">Image</form:label></td>   
+			<td><form:label path="image">
+			<spring:message text="Image"/>
+			</form:label></td>
+			<td><form:input type="file" name="image" path="image"/></td>
+			
+		<%-- <td><form:label path="image">Image</form:label></td>   
 		  
-							<td>   <form:input type="file" path="image" /></td>
+							<td>   <form:input type="file" path="image" /></td> --%>
 			</tr>
 			<tr>
 				<td colspan="2"><c:if test="${!empty product.name}">
@@ -98,7 +104,7 @@ margin-left:600px;
 				<th width="200">Product Description</th>
 				<th width="80">Category</th>
 				<th width="80">Supplier</th>
-				<td><img src="<c:url value="F:\images /${product.pid}.jpg"/>"></td>
+				<th width="80">Image</th>
 				<th width="60">Edit</th>
 				<th width="60">Delete</th>
 			</tr>
@@ -110,8 +116,9 @@ margin-left:600px;
 					<td>${product.description}</td>
 					<td>${product.category.cname}</td>
 					<td>${product.supplier.name}</td>
-					<td><a href="<c:url value='product/edit/${product.pid}' />">Edit</a></td>
-					<td><a href="<c:url value='product/remove/${product.pid}' />">Delete</a></td>
+					<td><img src="<c:url value="F:\tronicsville/${product.pid}.jpg"/>"></td>
+					<td><a href="<c:url value='editproduct/${product.pid}' />">Edit</a></td>
+					<td><a href="<c:url value='removeproduct/${product.pid}' />">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</table>
