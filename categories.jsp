@@ -19,7 +19,7 @@ margin-left:600px;
 	<c:url var="addAction" value="/addcategory"></c:url>
 
 	<form:form action="${addAction}" commandName="category">
-		<table>
+		<table style="width:100%">
 			<tr>
 				<td><form:label path="cid">
 						<spring:message text="Category Id" />
@@ -61,7 +61,7 @@ margin-left:600px;
 	<br>
 	<h3>Categories List</h3>
 	<c:if test="${!empty categoryList}">
-		<table class="tg">
+		<table>
 			<tr>
 				<th width="80">Category ID</th>
 				<th width="120">Category Name</th>

@@ -60,7 +60,7 @@ public class ProductController {
 		MultipartFile image=product.getImage();
 		FileUtil.upload(path, image, product.getPid() + ".jpg");
 		model.addAttribute("productList", this.productDao.list());
-		return "products";
+		return "redirect:/products";
 	
 	/*public String addProduct(@ModelAttribute("product")Product product,Model model){
 	Category category = categoryDao.getByName(product.getCategory().getCname());
@@ -91,9 +91,9 @@ public class ProductController {
 	public String deleteProduct(@PathVariable("id") String id,ModelMap model)throws Exception{
 		try{
 			productDao.delete(id);
-			model.addAttribute("message", "Successfully Deleted");
+			model.addAttribute("msg", "Successfully Deleted");
 		}catch (Exception e){
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute("msg", e.getMessage());
 			e.printStackTrace();
 		}
 		return "redirect:/products";

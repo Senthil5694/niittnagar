@@ -92,7 +92,7 @@ text-decoration:none;
 <li><a href="#">home appliances</a></li>
 </ul>
 </li>
-<li><a href="login">signin</a></li>
+<li><a href="login">login</a></li>
 <li><a href="register">register</a></li>
 </ul>
 <hr>

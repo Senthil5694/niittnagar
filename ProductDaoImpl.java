@@ -85,4 +85,9 @@ public class ProductDaoImpl implements  ProductDao {
 		
 	}
 
+	public void saveOrUpdate(Product product) {
+		sessionFactory.getCurrentSession().saveOrUpdate(product);
+		
+	}
+
 }

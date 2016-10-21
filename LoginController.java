@@ -1,9 +1,13 @@
 package com.controller;
 
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,6 +71,16 @@ public class LoginController {
 	public ModelAndView login(@RequestParam(value="username") String username,
 			@RequestParam(value="password") String password,HttpSession session){
 		System.out.println("login controller");
+/*String name = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		@SuppressWarnings("unchecked")
+		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		String page="";
+		
+		String role="ROLE_ADMIN";
+		for (GrantedAuthority authority:authorities) 
+		{
+		 System.out.println(authority.getAuthority());*/
 		registerModel = registerDao.isValidUser(username, password);
 		ModelAndView mv = null;
 		if(registerModel == null){
@@ -88,6 +102,7 @@ public class LoginController {
 		session.setAttribute("username", registerModel.getUsername());
 	}
 	}
+		
 	return mv;	
 	}
 	

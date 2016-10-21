@@ -14,9 +14,9 @@ margin-top:160px;
 margin-top:235px;
 }
 </style>
-</head>
 <%@include file="header.jsp" %>
-<body background="F:\project\E-commerce project/bag flowers.jpg">
+</head>
+<body>
 <form:form action="Success" method="post" commandName="registerModel">
 
 		<center>
@@ -73,7 +73,7 @@ margin-top:235px;
 						<spring-message text="mobilenumber" />
 					</form:label> MobileNumber:<td>
 				
-				<td><form:input type="number" path="mobilenumber" required="true" pattern=".{10,10}" title="please enter a valid mobile number" /></td>
+				<td><form:input type="number" path="mobilenumber" required="true" pattern=".{10,10}" title="Enter a valid mobile number" /></td>
 			</tr>
 			
 			<tr>

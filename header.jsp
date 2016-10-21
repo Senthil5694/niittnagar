@@ -88,7 +88,7 @@ display:inline-block;
 <li><a href="#">home appliances</a></li>
 </ul>
 </li>
-<li><a href="login">signin</a></li>
+<li><a href="login">Login</a></li>
 <li><a href="register">register</a></li>
 </ul>
 <hr>

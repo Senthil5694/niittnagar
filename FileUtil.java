@@ -8,13 +8,13 @@ import java.io.OutputStream;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileUtil {
-	public static String upload(String path, MultipartFile file,String fileName){
-		  if(!file.isEmpty()){
+	public static String upload(String path, MultipartFile image,String fileName){
+		  if(!image.isEmpty()){
 			  InputStream inputstream = null;
 			  OutputStream outputstream = null;
-			  if(file.getSize()>0){
+			  if(image.getSize()>0){
 				  try {
-					inputstream=file.getInputStream();
+					inputstream=image.getInputStream();
 					outputstream=new FileOutputStream(path + fileName);
 					int readBytes=0;
 					byte[] buffer=new byte[1024];

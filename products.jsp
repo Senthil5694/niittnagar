@@ -20,7 +20,7 @@ margin-left:600px;
 	<c:url var="addAction" value="/addproduct"></c:url>
 
 	<form:form action="${addAction}" method="post" enctype="multipart/form-data" commandName="product">
-		<table>
+		<table style="width:100%">
 			<tr>
 				<td><form:label path="pid">
 						<spring:message text="Product Id" />
