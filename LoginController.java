@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,58 +54,117 @@ public class LoginController {
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public ModelAndView register(@ModelAttribute RegisterModel registerModel){
-		return new ModelAndView("register");
-	}
-	@RequestMapping(value="/Success",method=RequestMethod.POST)
-	public ModelAndView success(@ModelAttribute RegisterModel registerModel)
-	{
 		ModelAndView mv;
-		String msg;
-		msg="you have registered successfully please login now";
-		registerDao.save(registerModel);
-		mv= new ModelAndView("Success");
-		mv.addObject("msg",msg);
+		mv= new ModelAndView("register");
 		return mv;
-		
 	}
 	
-	@RequestMapping(value="/check")
-	public ModelAndView login(@RequestParam(value="username") String username,
-			@RequestParam(value="password") String password,HttpSession session){
+	@RequestMapping(value="/registersuccess")
+	public ModelAndView success(@ModelAttribute RegisterModel registerModel)
+	{
+		ModelAndView mv;	
+		registerDao.save(registerModel);
+		String msg;
+		msg="you have registered successfully please login now";
+		mv= new ModelAndView("login");
+		mv.addObject("msg",msg);
+		return mv;
+		/*ModelAndView mv;
+		mv= new ModelAndView("login");
+		int j=0;
+		
+		 List<RegisterModel> registermodellist=registerDao.List();
+
+		    for (int i=0; i< registermodellist.size(); i++) {
+		        if(registerModel.getEmailid().equals(registermodellist.get(i).getEmailid())) {
+		        	mv= new ModelAndView("Register");
+		        	mv.addObject("msg","Email already exists");
+		            j=1;
+		            
+		        }	       
+
+		        if(registerModel.getUsername().equals(registermodellist.get(i).getUsername())) {
+		            mv= new ModelAndView("Register");
+		            mv.addObject("msg","Username already exists");
+		            j=1;
+		            }
+		        if(registerModel.getMobilenumber().equals(registermodellist.get(i).getMobilenumber())) {
+		            mv= new ModelAndView("Register");
+		            mv.addObject("msg","mobile number already exists");
+		            j=1;
+		            }
+		    }
+		    if(j==0){
+		    	mv.addObject("msg","You have registered successfully, please log in to continue");
+			    registerDao.save(registerModel);    	
+		    }
+
+			
+		    return mv;*/
+	}
+	
+	@RequestMapping(value="/loginsuccess")
+	public String login(@RequestParam(value="username") String name,
+			@RequestParam(value="password") String password,HttpSession session,Model model){
 		System.out.println("login controller");
-/*String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		@SuppressWarnings("unchecked")
 		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 		String page="";
 		
-		String role="ROLE_ADMIN";
+		String role="ROLE_USER";
 		for (GrantedAuthority authority:authorities) 
 		{
-		 System.out.println(authority.getAuthority());*/
-		registerModel = registerDao.isValidUser(username, password);
+		 System.out.println(authority.getAuthority());
+		/*registerModel = registerDao.isValidUser(username, password);
 		ModelAndView mv = null;
 		if(registerModel == null){
         mv = new ModelAndView ("login");
 		mv.addObject("msg", "Invalid credentials please try again");
-	} else {
-		if (registerModel.getRole().equals("ROLE_ADMIN")){
-			mv = new ModelAndView("admin");
+	} else {*/
+		if (authority.getAuthority().equals(role)){
 		session.setAttribute("categoryList", categoryDao.list());
 		session.setAttribute("supplierList", supplierDao.list());
 		session.setAttribute("productList", productDao.list());
-		
+		session.setAttribute("username", registerModel.getUsername());
 		session.setAttribute("category", category);
 		session.setAttribute("supplier", supplier);
 		session.setAttribute("product", product);
+		session.setAttribute("username", username);
+		page="user";
+		break;
 	}
-	else if (registerModel.getRole().equals("ROLE_USER")){
-			mv = new ModelAndView("user");
-		session.setAttribute("username", registerModel.getUsername());
+	else {
+		page="admin";
+		break;
 	}
 	}
 		
-	return mv;	
+     return page;
+	}
+	
+	@RequestMapping("/isValidUser")
+	public ModelAndView validuser(@RequestParam(value="username")String name,@RequestParam(value="password")String password, HttpSession session,Model model){
+		
+	
+		String message;
+		ModelAndView mv ;
+		
+		
+		if (registerDao.isValidUser(name,password)) 
+		{
+			message = "Successfully Logged in";
+			 mv = new ModelAndView("user");
+		} else{
+			message="Please enter a valid username and password";
+			mv=new ModelAndView("Success");
+		}
+
+		mv.addObject("message", message);
+		mv.addObject("username",name);
+		return mv;
+	
 	}
 	
 	@RequestMapping("/logout")
