@@ -116,7 +116,7 @@ margin-left:600px;
 					<td>${product.description}</td>
 					<td>${product.category.cname}</td>
 					<td>${product.supplier.name}</td>
-					<td><img src="<c:url value="F:\tronicsville/${product.pid}.jpg"/>"></td>
+				    <td><img src="<c:url value="F:\tronicsville/${product.pid}.jpg"/>"></td> 
 					<td><a href="<c:url value='editproduct/${product.pid}' />">Edit</a></td>
 					<td><a href="<c:url value='removeproduct/${product.pid}' />">Delete</a></td>
 				</tr>
@@ -124,4 +124,5 @@ margin-left:600px;
 		</table>
 	</c:if>
 </body>
+<%@include file="footer.jsp" %>
 </html>

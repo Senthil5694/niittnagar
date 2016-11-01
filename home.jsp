@@ -77,6 +77,7 @@ display:inline-block;
 </ul>
 <h1>Tronicsville</h1>
 <hr>
+<h1>${logoutmessage}</h1>
 <ul class="menu-new">
 <li><a href="aboutus">about us</a></li>
 <li><a href="contactus">contact us</a></li>
@@ -88,7 +89,7 @@ display:inline-block;
 <li><a href="homeappliances">home appliances</a></li>
 </ul>
 </li>
-<li><a href="login">signin</a></li>
+<li><a href="login">login</a></li>
 <li><a href="register">register</a></li>
 </ul>
 <hr>

@@ -8,7 +8,7 @@
 <style>
 ul li{
 display:inline;
-padding-left:50px;
+padding-left:3px;
 margin-left:120px;
 color:white;
 }
@@ -34,8 +34,10 @@ text-transform:uppercase;
 <li><a href="categories">Manage Categories</a></li>
 <li><a href="suppliers">Manage Suppliers</a></li>
 <li><a href="products">Manage Products</a></li>
+<li><a href="viewcustomers">View Customers</a></li>
 <li><a href="logout">Log out</a></li>
 </ul>
 </div>
 </body>
+<%-- <%@include file="footer.jsp" %> --%>
 </html>

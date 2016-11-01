@@ -24,7 +24,7 @@ interesting way at affordable prices.</p>
 <h4 style="color:#ff3e96">About Website</h4>
 <p>Tronics ville is an eletronics items selling website which has a wide variety of electronics in all top brands at a resonable price.</p>
 <h4 style="color:#ff3e96">About Company</h4>
-<p>The company was started on january 6 2016 which has its headquarters in chennai,tamilnadu</p>
+<p>The company was started on january 6 2016 which has its headquarters in Chennai,tamilnadu</p>
 </div>
 <div class="footer">
 <%@include file="footer.jsp" %>

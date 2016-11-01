@@ -101,7 +101,7 @@ background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5
 					
 <div class="form-group">
 
-<input type="number" name="mobilenumber"  class="form-control input-lg"  required="true" pattern=".{10,10}" title="Enter a valid mobile number" placeholder="Mobile Number" tabindex="6">
+<input type="text" name="mobilenumber"  class="form-control input-lg"  required="true" pattern="[789][0-9]{9}" title="Enter a valid mobile number" placeholder="Mobile Number" tabindex="6">
 
 </div>
 

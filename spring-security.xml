@@ -25,7 +25,7 @@
 
 <security:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/suppliers"/>
 
-<security:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/viewCustomers"/>
+<security:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/viewcustomers"/>
 
 <security:intercept-url access="hasRole('ROLE_USER')" pattern="/"/>
 

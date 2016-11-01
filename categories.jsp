@@ -81,4 +81,5 @@ margin-left:600px;
 		</table>
 	</c:if>
 </body>
+<%@include file="footer.jsp" %>
 </html>
