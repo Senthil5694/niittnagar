@@ -5,15 +5,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.Dao.CategoryDao;
 import com.Dao.ProductDao;
+import com.Dao.RegisterDao;
 import com.Dao.SupplierDao;
 import com.Model.Category;
 import com.Model.Product;
+import com.Model.RegisterModel;
 import com.Model.Supplier;
 
 @Controller
@@ -35,6 +38,12 @@ public class Homecontroller {
 	
 	@Autowired
 	private Supplier supplier;
+	
+	@Autowired
+	private RegisterDao registerDao;
+	
+	@Autowired
+	private RegisterModel registerModel;
 	
 	@RequestMapping(value="/home")
     public ModelAndView home(HttpSession session){
@@ -63,5 +72,12 @@ public class Homecontroller {
 	@RequestMapping("/laptops")
 	public String laptops(){
 		return "laptops";
+	}
+	@RequestMapping("/viewcustomers")
+	public String customers(Model model){
+		model.addAttribute("customerList",this.registerDao.List());
+		model.addAttribute("register", registerModel);
+		return "customers";
+		
 	}
 	}

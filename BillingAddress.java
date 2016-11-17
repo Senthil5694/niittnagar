@@ -9,15 +9,12 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Component
+@Component("billingaddress")
 public class BillingAddress {
 
 	@Id
 	@NotNull
 	private String billingaddressid;
-	
-	@Column
-	private String customerid;
 	
 	@Column
 	@NotBlank(message="please specify main address")
@@ -42,6 +39,17 @@ public class BillingAddress {
 	@Column
 	@NotBlank(message="please specify zipcode")
 	private String zipcode;
+	
+	@Column
+	private String username;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	public String getBillingaddressid() {
 		return billingaddressid;
@@ -49,14 +57,6 @@ public class BillingAddress {
 
 	public void setBillingaddressid(String billingaddressid) {
 		this.billingaddressid = billingaddressid;
-	}
-
-	public String getCustomerid() {
-		return customerid;
-	}
-
-	public void setCustomerid(String customerid) {
-		this.customerid = customerid;
 	}
 
 	public String getLine1() {

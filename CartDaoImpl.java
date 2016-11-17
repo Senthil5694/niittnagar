@@ -3,6 +3,7 @@ package com.DaoImpl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,26 +15,26 @@ import com.Model.Cart;
 @Transactional
 @Repository("cartDao")
 public class CartDaoImpl implements CartDao{
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	@Autowired
+
 	public CartDaoImpl(SessionFactory sessionFactory)
 	{
 		
 		try {
 			this.sessionFactory = sessionFactory;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	public void saveOrupdate(Cart cart) {
 		sessionFactory.getCurrentSession().saveOrUpdate(cart);
-		
+	
 	}
-
+// this method will return list of cart details
 	public List<Cart> list() {
 		@SuppressWarnings("unchecked")
 		List<Cart> list = (List<Cart>) 
@@ -43,7 +44,9 @@ public class CartDaoImpl implements CartDao{
 
 		return list;	
 	}
-	public boolean delete(String cartid) {
+	
+	
+	public boolean delete(int cartid) {
 		Cart cart = new Cart();
 		cart.setCartid(cartid);
 		try
@@ -57,5 +60,9 @@ public class CartDaoImpl implements CartDao{
 		return true;
 	}
 
+	public Cart getCartById(int cartid) {
+		Session session = sessionFactory.getCurrentSession();
+        return (Cart) session.get(Cart.class, cartid);
+	}
 
 }

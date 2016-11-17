@@ -14,6 +14,7 @@ margin-top:260px;
 </head>
 <body>
 <%@include file="header.jsp" %>
+<center><h2 style="color:green">About Us</h2></center>
 <div class="about">
 <p>Dear Customers and visitors, I am pleased to welcome you to our website. 
 The inception of Tronicsville is to impart shopping in the most simple, 
@@ -27,7 +28,7 @@ interesting way at affordable prices.</p>
 <p>The company was started on january 6 2016 which has its headquarters in Chennai,tamilnadu</p>
 </div>
 <div class="footer">
-<%@include file="footer.jsp" %>
+<%@include file="common-footer.jsp" %>
 </div>
 </body>
 </html>

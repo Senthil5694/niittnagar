@@ -63,13 +63,6 @@ public class LoginController {
 	public ModelAndView success(@ModelAttribute RegisterModel registerModel)
 	{
 		ModelAndView mv;	
-		registerDao.save(registerModel);
-		String msg;
-		msg="you have registered successfully please login now";
-		mv= new ModelAndView("login");
-		mv.addObject("msg",msg);
-		return mv;
-		/*ModelAndView mv;
 		mv= new ModelAndView("login");
 		int j=0;
 		
@@ -77,19 +70,19 @@ public class LoginController {
 
 		    for (int i=0; i< registermodellist.size(); i++) {
 		        if(registerModel.getEmailid().equals(registermodellist.get(i).getEmailid())) {
-		        	mv= new ModelAndView("Register");
+		        	mv= new ModelAndView("register");
 		        	mv.addObject("msg","Email already exists");
 		            j=1;
 		            
 		        }	       
 
 		        if(registerModel.getUsername().equals(registermodellist.get(i).getUsername())) {
-		            mv= new ModelAndView("Register");
+		            mv= new ModelAndView("register");
 		            mv.addObject("msg","Username already exists");
 		            j=1;
 		            }
 		        if(registerModel.getMobilenumber().equals(registermodellist.get(i).getMobilenumber())) {
-		            mv= new ModelAndView("Register");
+		            mv= new ModelAndView("register");
 		            mv.addObject("msg","mobile number already exists");
 		            j=1;
 		            }
@@ -100,7 +93,7 @@ public class LoginController {
 		    }
 
 			
-		    return mv;*/
+		    return mv;
 	}
 	
 	@RequestMapping(value="/loginsuccess")
@@ -130,9 +123,9 @@ public class LoginController {
 		session.setAttribute("username", registerModel.getUsername());
 		session.setAttribute("category", category);
 		session.setAttribute("supplier", supplier);
-		session.setAttribute("product", product);
+		session.setAttribute("product", new Product());
 		session.setAttribute("username", username);
-		page="user";
+		page="productview";
 		break;
 	}
 	else {
@@ -174,8 +167,6 @@ public class LoginController {
 		session=request.getSession(true);
 		session.setAttribute("category", category);
 		session.setAttribute("categoryList", categoryDao.list());
-		mv.addObject("logoutmessage","you are successfully logged out");
-		mv.addObject("loggedout", "true");
 		return mv;
 	}
 	@RequestMapping(value="/login")

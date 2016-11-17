@@ -9,11 +9,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-h1
-{
-margin:0px;
-text-align:center;
-}
 .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
       width: 70%;
@@ -66,28 +61,30 @@ display:inline-block;
 </style>
 </head>
 <body bgcolor=lightgreen>
-<img src="F:\project\E-commerce project/tronics.png" width="100" height="50"/>
+<img src="F:\project\E-commerce project/tronics.png" width="100" height="30"/>
 <ul class="icons">
 <li><a href="https://www.facebook.com" target="blank"><img src="F:\project\E-commerce project/facebook.png" height="30"/></a></li>
 <li><a href="https://plus.google.com" target="blank"><img src="F:\project\E-commerce project/googleplus.png" height="30"/></a></li>
 <li><a href="https://www.linkedin.com" target="blank"><img src="F:\project\E-commerce project/linkedin.png" height="30"/></a></li>
 <li><a href="https://twitter.com" target="blank"><img src="F:\project\E-commerce project/twitter.png" height="30"/></a></li>
 </ul>
+<center>
 <h1>Tronicsville</h1>
+</center>
 <hr>
 <ul class="menu-new">
 <li><a href="aboutus">about us</a></li>
 <li><a href="contactus">contact us</a></li>
 <li><a href="#"> products</a>
 <ul class="drop">
-<li><a href="mobiles">mobiles</a></li>
-<li><a href="laptops">laptops</a></li>
-<li><a href="tabs">tabs</a></li>
+<li><a href="mobiles">Mobiles</a></li>
+<li><a href="laptops">Laptops</a></li>
+<li><a href="tabs">Tabs</a></li>
 <li><a href="homeappliances">home appliances</a></li>
 </ul>
 </li>
-<li><a href="login">signin</a></li>
-<li><a href="register">register</a></li>
+<li><a href="login">Login</a></li>
+<li><a href="register">Register</a></li>
 </ul>
 <hr>
 <div id="container">

@@ -31,7 +31,11 @@ public class ProductController {
 	@Autowired
 	private SupplierDao supplierDao;
 	
+	@Autowired
+	private Product product;
+	
 	private String path = "F:\\tronicsville\\";
+	
 	
 	@RequestMapping(value="/products")
 	public String listProducts(Model model)	{
@@ -87,21 +91,20 @@ public class ProductController {
 	model.addAttribute("productList",this.productDao.list());
 	return "products";*/
 	}
-	@RequestMapping("/removeproduct/{id}")
-	public String deleteProduct(@PathVariable("id") String id,ModelMap model)throws Exception{
+	@RequestMapping("/removeproduct/{pid}")
+	public String deleteProduct(@PathVariable("pid") String pid,ModelMap model)throws Exception{
 		try{
-			productDao.delete(id);
-			model.addAttribute("msg", "Successfully Deleted");
+			productDao.delete(pid);
 		}catch (Exception e){
 			model.addAttribute("msg", e.getMessage());
 			e.printStackTrace();
 		}
 		return "redirect:/products";
 		}
-		@RequestMapping("editproduct/{id}")
-		public String editproduct(@PathVariable("id") String id, Model model){
+		@RequestMapping("editproduct/{pid}")
+		public String editproduct(@PathVariable("pid") String pid, Model model){
 			System.out.println("editproduct");
-			model.addAttribute("product", this.productDao.get(id));
+			model.addAttribute("product", this.productDao.get(pid));
 			model.addAttribute("productList", this.productDao.list());
 			model.addAttribute("categoryList", this.categoryDao.list());
 			model.addAttribute("supplierList", this.supplierDao.list());

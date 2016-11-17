@@ -1,12 +1,15 @@
 package com.Model;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Component("register")
@@ -31,9 +34,30 @@ public class RegisterModel {
 	
 	@Column
 	private String  role="ROLE_USER";
+	
+	@Column
+	private boolean enabled;
+	
+	@OneToOne
+	@JoinColumn(name="cartid")
+	@JsonIgnore
+	private Cart cart;
+	
 
+	public Cart getCart() {
+		return cart;
+	}
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
 	public String getUsername() {
 		return username;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	public void setUsername(String username) {
 		this.username = username;

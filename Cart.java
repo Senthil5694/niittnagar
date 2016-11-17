@@ -1,82 +1,71 @@
 package com.Model;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Component
-public class Cart {
+public class Cart implements Serializable {
+	
+	private static final long serialVersionUID = 13L;
 	@Id
-	private String cartid;
+	@GeneratedValue
+private int cartid;
 	
-	@Transient
-	private int total;
-	
-	@Column
-	private String productname;
-	
-	@Column
-	private char status;
-	
-	@Column
-	private int quantity;
-	
-	@Column
-	private int price;
 
-	public String getCartid() {
+	private double grandtotal;
+	
+	@OneToMany(mappedBy= "cart", cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    private List<CartItem> cartItems;
+
+	@OneToOne
+	@JoinColumn(name="username")
+	@JsonIgnore
+	private RegisterModel registerModel;
+	
+	public RegisterModel getRegisterModel() {
+		return registerModel;
+	}
+
+	public void setRegisterModel(RegisterModel registerModel) {
+		this.registerModel = registerModel;
+	}
+	public int getCartid() {
 		return cartid;
 	}
 
-	public void setCartid(String cartid) {
+	public void setCartid(int cartid) {
 		this.cartid = cartid;
 	}
 
-	public int getTotal() {
-		return total;
+	public double getGrandtotal() {
+		return grandtotal;
 	}
 
-	public void setTotal(int total) {
-		this.total = total;
+	public void setGrandtotal(double grandtotal) {
+		this.grandtotal = grandtotal;
 	}
 
-	public String getProductname() {
-		return productname;
+	public List<CartItem> getCartItems() {
+		return cartItems;
 	}
 
-	public void setProductname(String productname) {
-		this.productname = productname;
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
 	}
 
-	public char getStatus() {
-		return status;
-	}
-
-	public void setStatus(char status) {
-		this.status = status;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
 	
-	
-	
-
 }

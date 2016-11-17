@@ -23,7 +23,7 @@ public class SupplierDaoImpl implements SupplierDao {
 		
 		this.sessionFactory = sessionFactory;
 	}
-
+//this method is used to save supplierdetails
 	public boolean save(Supplier supplier) {
 		try
 		{
@@ -35,7 +35,7 @@ public class SupplierDaoImpl implements SupplierDao {
 		}
 		return true;
 	}
-
+//this method is used to update supplierdetails
 	public boolean update(Supplier supplier) {
 		try
 		{
@@ -48,7 +48,7 @@ public class SupplierDaoImpl implements SupplierDao {
 		return true;	
 	
 	}
-
+//this method is used to delete a supplier from database
 	public boolean delete(String sid) {
 	Supplier supplier = new Supplier();
 	supplier.setSid(sid);
@@ -64,7 +64,7 @@ public class SupplierDaoImpl implements SupplierDao {
 	
 	}
 	
-	
+	//this method is used to get a supplier detail using supplierid
 	public Supplier get(String sid) {
 	String hql = "from Supplier where sid =" + "'" + sid + "'";
 	Query query = sessionFactory.getCurrentSession().createQuery(hql);
@@ -76,6 +76,7 @@ public class SupplierDaoImpl implements SupplierDao {
 	}
 	return null;
 }
+	//this method is used to get all supplier details from the database
 @Transactional
 	public List<Supplier> list() {
 	@SuppressWarnings("unchecked")
@@ -87,6 +88,7 @@ public class SupplierDaoImpl implements SupplierDao {
 	return list;
 			
 	}
+//this method is used to get a supplier detail by using supplier name
 @Transactional
 public Supplier getByName(String name) {
 

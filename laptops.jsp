@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <title>Insert title here</title>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -77,6 +78,9 @@ color:blue;
   </div>
 </div>
 </div>
-<%@include file="footer.jsp" %>
+</div>
+</div>
+</div>
+<%@include file="common-footer.jsp" %>
 </body>
 </html>

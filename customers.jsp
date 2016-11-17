@@ -8,12 +8,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>customers</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <%@include file="admin.jsp" %>
 <center><h3>Customer Details</h3></center>
 <c:if test="${!empty customerList}">
-		<table>
+<div class="table-responsive">
+		<table class="table">
 			<tr>
 			     <th width="80">FirstName</th>
 			     <th width="80">LastName</th>
@@ -36,7 +43,8 @@
 				</tr>
 			</c:forEach>
 		</table>
+		</div>
 	</c:if>
 </body>
-<%@include file="footer.jsp" %>
+<%@include file="common-footer.jsp" %>
 </html>

@@ -5,6 +5,12 @@
 <html>
 <head>
 <title>Category</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style>
 .cat{
 margin-left:600px;
@@ -61,7 +67,8 @@ margin-left:600px;
 	<br>
 	<h3>Categories List</h3>
 	<c:if test="${!empty categoryList}">
-		<table>
+	<div class="table-responsive">
+			<table class="table">
 			<tr>
 				<th width="80">Category ID</th>
 				<th width="120">Category Name</th>
@@ -79,7 +86,8 @@ margin-left:600px;
 				</tr>
 			</c:forEach>
 		</table>
+		</div>
 	</c:if>
 </body>
-<%@include file="footer.jsp" %>
+<%@include file="common-footer.jsp" %>
 </html>

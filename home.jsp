@@ -145,6 +145,6 @@ display:inline-block;
 </figure>
 </div>
 </div>
-<%@include file="footer.jsp" %>
+<%@include file="common-footer.jsp" %>
 </body>
 </html>

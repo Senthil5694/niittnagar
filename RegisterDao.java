@@ -9,6 +9,7 @@ public interface RegisterDao {
 	public RegisterModel get(String username);
 	public boolean update(RegisterModel register);
 	public boolean delete(String username);
-	public RegisterModel isValidUser(String username, String password);
+	public boolean isValidUser(String username, String password);
 	public boolean save(RegisterModel register);
+	public RegisterModel getcustomerbyusername(String username);
 }

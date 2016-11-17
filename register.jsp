@@ -157,6 +157,6 @@ background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 </div>
-<%@include file="footer.jsp" %>
+<%@include file="common-footer.jsp" %>
 </body>
 </html>

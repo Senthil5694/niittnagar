@@ -77,6 +77,6 @@ color:blue;
   </div>
 </div>
 </div>
-<%@include file="footer.jsp" %>
+<%@include file="common-footer.jsp" %>
 </body>
 </html>

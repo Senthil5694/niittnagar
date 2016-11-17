@@ -116,5 +116,5 @@ margin-top:20px;
 </div>
 
 </body>
-<%@include file="footer.jsp" %>
+<%@include file="common-footer.jsp" %>
 </html>
