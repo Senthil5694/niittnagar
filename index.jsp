@@ -1,9 +1,8 @@
-<doctypehtml>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Tronicsville</title>
 <meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -33,7 +32,7 @@ padding:0px;
 ul li
 { 
 margin:0px;
-background-color:lightgreen;
+background-color:green;
 border:1px solid white;
 display:inline-block;
 text-align:center;
@@ -58,6 +57,10 @@ ul.icons li
 {
 display:inline-block;
 }
+#title{
+text-align:center;
+margin:0px;
+}
 </style>
 </head>
 <body bgcolor=lightgreen>
@@ -68,9 +71,9 @@ display:inline-block;
 <li><a href="https://www.linkedin.com" target="blank"><img src="F:\project\E-commerce project/linkedin.png" height="30"/></a></li>
 <li><a href="https://twitter.com" target="blank"><img src="F:\project\E-commerce project/twitter.png" height="30"/></a></li>
 </ul>
-<center>
+<div id="title">
 <h1>Tronicsville</h1>
-</center>
+</div>
 <hr>
 <ul class="menu-new">
 <li><a href="aboutus">about us</a></li>
@@ -139,6 +142,5 @@ display:inline-block;
 </figure>
 </div>
 </div>
-<%@include file="footer.jsp" %>
 </body>
 </html>
