@@ -19,6 +19,8 @@ public interface CartItemDao {
 	
 	public List<CartItem> getcartitembyusername(String username);
 	
+	public CartItem getcartbycartid(int cartid);
+	
 	//public void removeCartItems(Cart cart);
 	
 
