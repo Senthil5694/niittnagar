@@ -71,19 +71,19 @@ public class LoginController {
 		    for (int i=0; i< registermodellist.size(); i++) {
 		        if(registerModel.getEmailid().equals(registermodellist.get(i).getEmailid())) {
 		        	mv= new ModelAndView("register");
-		        	mv.addObject("msg","Email already exists");
+		        	mv.addObject("msg","Email already exists"+  registerModel.getEmailid());
 		            j=1;
 		            
 		        }	       
 
 		        if(registerModel.getUsername().equals(registermodellist.get(i).getUsername())) {
 		            mv= new ModelAndView("register");
-		            mv.addObject("msg","Username already exists");
+		            mv.addObject("msg","Username already exists"+  registerModel.getUsername());
 		            j=1;
 		            }
 		        if(registerModel.getMobilenumber().equals(registermodellist.get(i).getMobilenumber())) {
 		            mv= new ModelAndView("register");
-		            mv.addObject("msg","mobile number already exists");
+		            mv.addObject("msg","mobile number already exists"+registerModel.getMobilenumber());
 		            j=1;
 		            }
 		    }
@@ -91,11 +91,8 @@ public class LoginController {
 		    	mv.addObject("msg","You have registered successfully, please log in to continue");
 			    registerDao.save(registerModel);    	
 		    }
-
-			
 		    return mv;
 	}
-	
 	@RequestMapping(value="/loginsuccess")
 	public String login(@RequestParam(value="username") String name,
 			@RequestParam(value="password") String password,HttpSession session,Model model){
