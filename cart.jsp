@@ -8,6 +8,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+   <title>Cart</title>
 </head>
 <body>
 
@@ -15,7 +17,7 @@
 <div class="span9 margin-bottom center"> 
 					<h3>Items in your cart</h3>
 					</div>
-<div class="span9 margin-left10" ng-app="addToCartApp"  ng-controller = "addToCartCtrl" ng-init="retrieveCart('${cartId}')">
+<div class="span9 margin-left10" ng-app="addToCartApp"  ng-controller = "addToCartCtrl" ng-init="retrieveCart('${cartid}')">
 	 
 	 <div class="row margin-left25">
         <table class="table table-bordered table-striped fs13" >
@@ -27,16 +29,16 @@
 				<th >Unit Price</th>
 				<th>Quantity</th>
 				<th>Total Price(in Rs.)</th>
-				<th>Action</th>
+				<th>Remove</th>
 			  </tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat = "items in cart.cartitems">
-					 	<td class="span1"><img src="E:\images/{{product.name}}.jpg" alt="image"/></td>
+				<tr ng-repeat = "items in cart.cartItems">
+					 	<td class="span1"><img src="F:\tronicsville/${product.pid}.jpg" alt="image"/></td>
 						<td>{{items.pname}}</td>
 						<td>{{items.price}}</td>
 						<td>{{items.quantity}}</td>
-						<td>{{items.total}}</td>
+						<td>{{items.totalPrice}}</td>
 						<td><button class="btn btn-danger btnAction" ng-click="removeItemFromCart('${items.product.pid}')">
 							<span class="glyphicon glyphicon-remove"></span>remove</button></td>
 					</tr>
@@ -50,28 +52,6 @@
                 </tr>	  
 			</tbody>
 		  </table>
-		  
-		  
-
-          <div class="row">
-		  <div class="span3">
-             <a href="<spring:url value="/" />" class="btn btn-primary center">Continue Shopping</a>
-			</div>	
-			<div class="span3">
-             <a href="<spring:url value="/order/${cartid}"/>"
-                   class="btn btn-success center"><span class="glyphicon-shopping-cart glyphicon"></span> Check out
-                </a>
-			</div>	  
-			<div class="span2">
-           <a class="btn btn-danger center" ng-click="clearCartItems()"><span
-                        class="glyphicon glyphicon-remove-sign"></span>Clear Cart</a>
-			</div>		  
-			
-        </div>
-		</div>
-      </div>     
-
- 
 <script>
  var cartApp = angular.module ("addToCartApp", []);
 
@@ -98,7 +78,7 @@
          var grandTotal=0;
 
          for (var i=0; i<$scope.cart.cartItems.length; i++) {
-             grandTotal+=$scope.cart.cartItems[i].total;
+             grandTotal+=$scope.cart.cartItems[i].totalPrice;
         }
 
          return grandTotal;

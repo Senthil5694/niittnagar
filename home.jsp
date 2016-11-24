@@ -18,7 +18,7 @@ text-align:center;
 }
 .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
-      width: 70%;
+      width: 100%;
       margin: auto;
 }
 ul.menu-new {margin: 0px; width: 100%; text-align: center; display: inline-block; padding: 15px;}
@@ -40,7 +40,7 @@ padding:0px;
 ul li
 { 
 margin:0px;
-background-color:lightgreen;
+background-color:green;
 border:1px solid white;
 display:inline-block;
 text-align:center;

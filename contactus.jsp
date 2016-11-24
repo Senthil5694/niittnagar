@@ -1,34 +1,89 @@
-<doctypehtml>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Tronicsville</title>
+<title>
+ContactUs
+</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-.contact{
-padding-left:500px;
+.jumbotron {
+background: #358CCE;
+color: #FFF;
+border-radius: 0px;
 }
-.footer{
-margin-top:270px;
+
+.jumbotron-sm { padding-top: 24px;
+padding-bottom: 24px; }
+
+.jumbotron small {
+color: #FFF;
+}
+.h1 small {
+font-size: 24px;
+}
+.contact{
+margin-left:600px;
 }
 </style>
 </head>
-</body>
-<%@include file="header.jsp" %>
-<center>
-<h2 style="color:green">Contact Us</h2></center>
-<h4>We are here to answer questions you may have about our website experience. Reach out to us and we will respond as soon as
- we can.</h4>
-<h4>Even if there is something you have always wanted to experience and cannot find it in our website,let us know. and
-we promise that we will do our best to find it for you to send it there.</h4>
-<div class="contact">
-<h3>Tronicsville</h3>
-<h3>Toll Free:1800 5641 ,24 hours Customer Care</h3>
-<h3>Feedback:tronicsville@gmail.com</h3>
-<h3>Complaints:tronicsvillecomplaints@gmail.com</h3>
-<h3>Chennai,Tamilnadu,India</h3>
+<body>
+<%@ include file="header.jsp" %>
+<div class="jumbotron jumbotron-sm">
+  
+  <div class="container">
+     
+   <div class="row">
+     
+       <div class="col-sm-12 col-lg-12">
+   
+             <h1 class="h1">
+    
+                Contact us <small>Feel free to contact us</small></h1>
+  
+          </div>
+   
+     </div>
+   
+ </div>
+
 </div>
-<div class="footer">
-<%@include file="common-footer.jsp" %>
-</div>
+  
+<div class="contact">     
+ <div class="col-md-4">
+            <form>
+               
+  <legend><span class="glyphicon glyphicon-globe"></span> Our office</legend>
+   
+         <address>
+                <strong>TronicsVille</strong><br>
+   
+    No.36,Ville Street,Velacherry
+         Chennai,Tamilnadu<br>
+             
+   India<br>
+     
+           <abbr title="Phone">
+   
+                 </abbr>
+          
+      Toll Free:1800 5641 
+Complaints:tronicsvillecomplaints@gmail.com<br> </address>
+            <address>
+       
+         <strong>FeedBack</strong><br>
+            
+    <a href="mailto:tronicsville@gmail.com">tronicsville@gmail.com</a>
+       
+     </address>
+                
+     </form>
+        </div>
+    </div>
+
+</div></div>
+
 </body>
-</html>
+<%-- <%@ include file="common-footer.jsp"%>  --%>

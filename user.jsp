@@ -93,7 +93,7 @@ text-decoration:none;
 </ul>
 </li>
 <li><a href="logout">logout</a></li>
-<!-- <li><a href="register">register</a></li> -->
+<li><a href="viewcart">Cart</a></li>
 </ul>
 <hr>
 <div id="container">

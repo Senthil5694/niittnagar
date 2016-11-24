@@ -70,7 +70,7 @@ text-align:center;
 </style>
 </head>
 <body bgcolor=lightgreen>
-<a href="home"><img src="F:\project\E-commerce project/tronics.png" width="100" height="50"/></a>
+<a href="home"><img src="F:\project\E-commerce project/tronics.png" width="100" height="30"/></a>
 <ul class="icons">
 <li><a href="https://www.facebook.com" target="blank"><img src="F:\project\E-commerce project/facebook.png" height="30"/></a></li>
 <li><a href="https://plus.google.com" target="blank"><img src="F:\project\E-commerce project/googleplus.png" height="30"/></a></li>
@@ -79,6 +79,7 @@ text-align:center;
 </ul>
 <h1>Tronicsville</h1>
 <hr>
+<h3>Welcome:${username}</h3>
 <ul class="menu-new">
 <li><a href="aboutus">about us</a></li>
 <li><a href="contactus">contact us</a></li>
@@ -90,8 +91,8 @@ text-align:center;
 <li><a href="#">home appliances</a></li>
 </ul>
 </li>
-<li><a href="login">Login</a></li>
-<li><a href="register">register</a></li>
+<li><a href="user/cart">Cart</a></li>
+<li><a href="logout">Logout</a></li>
 </ul>
 <hr>
 </body>

@@ -14,6 +14,7 @@
 <title>products</title>
 </head>
 <body>
+<%@include file="userheader.jsp" %>
 <center>
 <h1>Dell brand laptops</h1>
 </center>
@@ -22,7 +23,7 @@
   <div class="row">
   <c:forEach items="${productList}" var="product">
      <div class="col-sm-4">
-      <h3 style="color:red;">${product.name}</h3>
+      <h3>${product.name}</h3>
       <img src="F:\tronicsville/${product.pid}.jpg">
 <h3>price=Rs.${product.price}</h3>
 <span class="glyphicon glyphicon-shopping-cart"></span>
@@ -42,14 +43,14 @@
          $scope.refreshCartItems(cartid);
      };
      
-     $scope.removeItemFromCart = function (pid) {
-         $http.put('http://localhost:8080/tronics/usercart/cart/removeItem/'+pid).success(function (data) {
+     $scope.removeItemFromCart = function (cartitemid) {
+         $http.put('http://localhost:8080/tronics/usercart/cart/removeitem/'+cartitemid).success(function (data) {
              $scope.refreshCartItems();
          });
      };
 
       $scope.additemtocart = function (pid) {
-         $http.put('http://localhost:8080/tronics/usercart/user/additem/'+pid).success(function (data) {
+         $http.put('http://localhost:8080/tronics/usercart/cart/additem/'+pid).success(function (data) {
              alert("Item added to the cart!")
          });
      };
@@ -58,7 +59,7 @@
          var grandTotal=0;
 
          for (var i=0; i<$scope.cart.cartItems.length; i++) {
-             grandTotal+=$scope.cart.cartItems[i].total;
+             grandTotal+=$scope.cart.cartItems[i].totalPrice;
         }
 
          return grandTotal;
